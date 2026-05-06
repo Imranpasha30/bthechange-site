@@ -671,7 +671,7 @@ ${header({ rel: '', activeNav: '' })}
           <h3 style="color: var(--paper);">Power a <em style="font-family: var(--font-serif); font-style: italic; color: var(--accent);">whole</em> program for a year.</h3>
           <p style="color: rgba(255,255,255,.75);">Four partnership tiers from ₹1,00,000 to ₹5,00,000+. CSR-1 eligible. 80G receipts. Quarterly impact reports. Site visits.</p>
           <div class="program-card-foot" style="border-top-color: rgba(255,255,255,.15);">
-            <div class="program-card-tag" style="background: rgba(220,79,26,.2); color: var(--accent);">CSR · 80G · 12A</div>
+            <div class="program-card-tag" style="background: rgba(26,54,93,.2); color: var(--accent);">CSR · 80G · 12A</div>
             <div class="program-card-go" style="color: var(--paper);">Talk on WhatsApp →</div>
           </div>
         </a>
@@ -2585,7 +2585,7 @@ ${scripts}
   function statusPill(s) {
     const map = {
       pending: { label: 'Pending review', color: '#a86b00', bg: 'rgba(212,144,32,.14)' },
-      approved:{ label: 'Live on the program page', color: 'var(--accent)', bg: 'rgba(220,79,26,.10)' },
+      approved:{ label: 'Live on the program page', color: 'var(--accent)', bg: 'rgba(26,54,93,.10)' },
       rejected:{ label: 'Not approved', color: '#9b2222', bg: 'rgba(155,34,34,.10)' },
     };
     const m = map[s] || map.pending;

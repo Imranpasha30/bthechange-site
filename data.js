@@ -19,7 +19,7 @@ const PROGRAMS = [
     slug: 'coding-on-wheels',
     name: 'Coding on Wheels',
     tagline: "Bridging India's digital divide through code, AI &amp; robotics.",
-    color: '#DC4F1A',
+    color: '#1A365D',
     logoBg: 'linear-gradient(135deg, #FFE4D6 0%, #FFCBA4 100%)',
     icon: 'monitor',
     stats: [
@@ -43,7 +43,7 @@ const PROGRAMS = [
     slug: 'changemakers',
     name: 'Changemakers',
     tagline: "Be the spark. Lead the change.",
-    color: '#DC4F1A',
+    color: '#1A365D',
     logoBg: 'linear-gradient(135deg, #FFF4E0 0%, #FFD8A0 100%)',
     icon: 'spark',
     stats: [
@@ -67,7 +67,7 @@ const PROGRAMS = [
     slug: 'organ-donation-on-wheels',
     name: 'Organ Donation Campaign on Wheels',
     tagline: "Wheels that carry the message of life.",
-    color: '#DC4F1A',
+    color: '#1A365D',
     logoBg: 'linear-gradient(135deg, #FFE0E0 0%, #FFB0B0 100%)',
     icon: 'heart',
     stats: [
@@ -215,7 +215,7 @@ const PROGRAMS = [
     slug: 'dreamcatchers',
     name: 'DreamCatchers',
     tagline: "From dreams to reality.",
-    color: '#DC4F1A',
+    color: '#1A365D',
     logoBg: 'linear-gradient(135deg, #FFE8E0 0%, #FFB8A0 100%)',
     icon: 'star',
     stats: [
@@ -239,7 +239,7 @@ const PROGRAMS = [
     slug: 'launchpad',
     name: 'Launchpad',
     tagline: "First job. First salary. First step.",
-    color: '#DC4F1A',
+    color: '#1A365D',
     logoBg: 'linear-gradient(135deg, #FFF0DC 0%, #FFD8A0 100%)',
     icon: 'rocket',
     stats: [
@@ -264,7 +264,7 @@ const PROGRAMS = [
     slug: 'lawgic',
     name: 'L.A.W.G.I.C.',
     tagline: "Free legal aid for those the system forgets.",
-    color: '#DC4F1A',
+    color: '#1A365D',
     logoBg: 'linear-gradient(135deg, #F0EDE5 0%, #D9D2BE 100%)',
     icon: 'scales',
     stats: [

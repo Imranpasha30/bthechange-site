@@ -1,0 +1,14 @@
+.git
+.github
+.gitignore
+.vscode
+.idea
+.claude
+.DS_Store
+Thumbs.db
+node_modules
+npm-debug.log
+*.md
+!README.md
+.env
+.env.*

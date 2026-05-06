@@ -53,6 +53,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css" />
+<script defer src="assets/page-transition.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script defer src="assets/supabase-config.js"></script>
 <script defer src="assets/admin-bell.js"></script>
@@ -588,7 +589,7 @@ document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el
   function statusPill(s) {
     const map = {
       pending: { label: 'Pending review', color: '#a86b00', bg: 'rgba(212,144,32,.14)' },
-      approved:{ label: 'Live on the program page', color: 'var(--accent)', bg: 'rgba(220,79,26,.10)' },
+      approved:{ label: 'Live on the program page', color: 'var(--accent)', bg: 'rgba(26,54,93,.10)' },
       rejected:{ label: 'Not approved', color: '#9b2222', bg: 'rgba(155,34,34,.10)' },
     };
     const m = map[s] || map.pending;

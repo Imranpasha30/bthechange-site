@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#0A1830" />
+<title>Story Mode · 3D · B The Change</title>
+<meta name="description" content="An immersive 3D river world. Sail the boat. Visit eleven shores. Choose to row or to scale." />
+<meta name="robots" content="noindex" />
+
+<link rel="icon" type="image/png" href="assets/bthechange-logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css" />
+<link rel="stylesheet" href="assets/story-mode.css" />
+</head>
+<body class="sm3-body">
+
+<!-- WebGL CANVAS -->
+<canvas id="sm3-canvas" aria-label="3D river world"></canvas>
+
+<!-- LOADING VEIL -->
+<div class="sm3-loading" id="sm3-loading">
+  <div class="sm3-loading-inner">
+    <div class="sm3-loading-mark">B</div>
+    <div class="sm3-loading-bar"><div class="sm3-loading-fill" id="sm3-loading-fill"></div></div>
+    <div class="sm3-loading-text">Building the river…</div>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<header class="sm3-hdr">
+  <a href="index.html" class="sm3-brand" aria-label="B The Change home">
+    <img src="assets/bthechange-logo.png" alt="" />
+    <span class="sm3-brand-text">B THE CHANGE</span>
+  </a>
+  <div class="sm3-counter" aria-live="polite">
+    <span class="sm3-counter-num" id="sm3-visited">0</span>
+    <span class="sm3-counter-sep">/</span>
+    <span class="sm3-counter-num">11</span>
+    <span class="sm3-counter-lbl">SHORES</span>
+  </div>
+  <a href="index.html" class="sm3-exit" aria-label="Exit story mode">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    <span>Exit</span>
+  </a>
+</header>
+
+<!-- INTRO PANEL — fades after first input -->
+<div class="sm3-intro" id="sm3-intro">
+  <div class="sm3-intro-eyebrow">CHAPTER 01 · THE BEGINNING</div>
+  <h1 class="sm3-intro-title">There is a river.</h1>
+  <p class="sm3-intro-lede">Not just water — a line between two realities. <em>You step into the boat.</em></p>
+  <p class="sm3-intro-prompt">
+    <span class="sm3-key">W</span><span class="sm3-key">A</span><span class="sm3-key">S</span><span class="sm3-key">D</span>
+    or
+    <span class="sm3-key">↑</span><span class="sm3-key">←</span><span class="sm3-key">↓</span><span class="sm3-key">→</span>
+    to sail
+  </p>
+  <p class="sm3-intro-hint">Reach the glowing shores to discover stories.</p>
+  <div class="sm3-keyprompt" id="sm3-intro-go" tabindex="0" role="button" aria-label="Press R or E to set sail">
+    <span class="sm3-key sm3-key--big">R</span>
+    <span class="sm3-keyprompt-or">or</span>
+    <span class="sm3-key sm3-key--big">E</span>
+    <span class="sm3-keyprompt-text">to set sail</span>
+  </div>
+</div>
+
+<!-- HUD: CHAPTER LABEL (changes as you progress) -->
+<div class="sm3-chapter" id="sm3-chapter" aria-live="polite">
+  <span class="sm3-chapter-num">02</span>
+  <span class="sm3-chapter-text">The Choice — change is not observed, it is chosen</span>
+</div>
+
+<!-- COMPASS — points to nearest unvisited shore -->
+<div class="sm3-compass" id="sm3-compass" aria-hidden="true">
+  <svg viewBox="0 0 60 60">
+    <circle cx="30" cy="30" r="27" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+    <g id="sm3-compass-needle" style="transform-origin: 30px 30px;">
+      <path d="M30,8 L34,30 L30,52 L26,30 Z" fill="currentColor"/>
+      <circle cx="30" cy="30" r="3" fill="currentColor"/>
+    </g>
+    <text x="30" y="6" text-anchor="middle" font-family="ui-monospace" font-size="6" font-weight="700" fill="currentColor">N</text>
+  </svg>
+  <span class="sm3-compass-lbl" id="sm3-compass-lbl">NEAREST SHORE</span>
+</div>
+
+<!-- SHORE PANEL: pops when boat reaches a shore -->
+<!-- DISEMBARK PROMPT — small bottom-screen prompt when ship is near an island -->
+<div class="sm3-disembark" id="sm3-disembark" hidden>
+  <span class="sm3-disembark-text">Approach <strong id="sm3-disembark-name">the island</strong></span>
+  <span class="sm3-key sm3-key--big">G</span>
+  <span class="sm3-disembark-action" id="sm3-disembark-action">go ashore</span>
+</div>
+
+<!-- LORE PANEL — pops when avatar walks near an info pillar -->
+<aside class="sm3-lore" id="sm3-lore" hidden>
+  <div class="sm3-lore-eyebrow" id="sm3-lore-eyebrow">PILLAR 01 · CODING ON WHEELS</div>
+  <h2 class="sm3-lore-title" id="sm3-lore-title">The Bus</h2>
+  <p class="sm3-lore-text" id="sm3-lore-text">Built in 2018, the Coding Bus visits 12 villages per fortnight. Each visit lasts 4 hours.</p>
+  <div class="sm3-lore-actions">
+    <span class="sm3-lore-progress" id="sm3-lore-progress">1 of 3</span>
+    <div class="sm3-keyprompt sm3-keyprompt--inline" id="sm3-lore-close" tabindex="0" role="button" aria-label="Press R or E to continue">
+      <span class="sm3-key">R</span><span class="sm3-keyprompt-or">/</span><span class="sm3-key">E</span>
+      <span class="sm3-keyprompt-text">continue</span>
+    </div>
+  </div>
+</aside>
+
+<aside class="sm3-shore-panel" id="sm3-shore-panel" hidden>
+  <div class="sm3-shore-panel-num" id="sm3-shore-num">01</div>
+  <div class="sm3-shore-panel-tag" id="sm3-shore-tag">EDUCATION · ADILABAD</div>
+  <h2 class="sm3-shore-panel-title" id="sm3-shore-title">Coding on Wheels</h2>
+  <p class="sm3-shore-panel-text" id="sm3-shore-text">A van teaching code where schools never reached.</p>
+  <div class="sm3-shore-panel-actions">
+    <a class="sm3-shore-panel-link" id="sm3-shore-link" href="programs/coding-on-wheels.html" target="_blank" rel="noopener">Read the full story →</a>
+    <div class="sm3-keyprompt sm3-keyprompt--inline" id="sm3-shore-close" tabindex="0" role="button" aria-label="Press R or E to continue">
+      <span class="sm3-key">R</span><span class="sm3-keyprompt-or">/</span><span class="sm3-key">E</span>
+      <span class="sm3-keyprompt-text">continue</span>
+    </div>
+  </div>
+</aside>
+
+<!-- DECISION PANEL: appears once 6+ shores visited -->
+<aside class="sm3-decision" id="sm3-decision" hidden>
+  <div class="sm3-decision-eyebrow">THE DECISION</div>
+  <h2 class="sm3-decision-title">The boat doesn't move because of water. <em>It moves because of people.</em></h2>
+  <p class="sm3-decision-lede">Two choices appear ahead.</p>
+  <div class="sm3-decision-grid">
+    <a href="https://wa.me/919000935898?text=Hi%2C%20I%20just%20sailed%20Story%20Mode.%20I%20want%20to%20volunteer%20with%20B%20The%20Change." target="_blank" rel="noopener" class="sm3-decision-card">
+      <div class="sm3-decision-glyph">→</div>
+      <h3>Join Us</h3>
+      <p>Step in. Become the one rowing.</p>
+      <span class="sm3-decision-cta">WhatsApp →</span>
+    </a>
+    <a href="https://wa.me/919000935898?text=Hi%2C%20I%20just%20sailed%20Story%20Mode.%20I%20want%20to%20sponsor%20B%20The%20Change." target="_blank" rel="noopener" class="sm3-decision-card sm3-decision-card--ship" id="sm3-sponsor">
+      <div class="sm3-decision-glyph">⛵</div>
+      <h3>Sponsor</h3>
+      <p>The boat becomes a ship.<br /><em>Hover to see.</em></p>
+      <span class="sm3-decision-cta">Become a partner →</span>
+    </a>
+  </div>
+  <div class="sm3-keyprompt" id="sm3-decision-close" tabindex="0" role="button" aria-label="Press R or E to keep exploring" style="align-self:center;margin-top:6px;">
+    <span class="sm3-key">R</span><span class="sm3-keyprompt-or">/</span><span class="sm3-key">E</span>
+    <span class="sm3-keyprompt-text">keep exploring</span>
+  </div>
+</aside>
+
+<!-- ENDING — appears once all 11 visited -->
+<aside class="sm3-ending" id="sm3-ending" hidden>
+  <div class="sm3-ending-eyebrow">THE ENDING — WHICH IS THE BEGINNING</div>
+  <blockquote class="sm3-ending-quote">
+    <p>"Don't watch change happen.<br /><span class="sm3-ending-accent">Be the one who moves it.</span>"</p>
+  </blockquote>
+  <div class="sm3-ending-cta">
+    <a href="index.html" class="sm3-btn sm3-btn--ghost">Return to site</a>
+    <a href="https://wa.me/919000935898?text=Hi%2C%20I%20just%20finished%20Story%20Mode.%20I%20want%20to%20be%20part%20of%20B%20The%20Change." target="_blank" rel="noopener" class="sm3-btn sm3-btn--accent">Be the change →</a>
+  </div>
+</aside>
+
+<!-- MOBILE CONTROLS -->
+<div class="sm3-touch" id="sm3-touch" aria-hidden="true">
+  <button class="sm3-touch-btn sm3-touch-btn--up" data-key="w" aria-label="Forward">▲</button>
+  <button class="sm3-touch-btn sm3-touch-btn--left" data-key="a" aria-label="Turn left">◀</button>
+  <button class="sm3-touch-btn sm3-touch-btn--down" data-key="s" aria-label="Back">▼</button>
+  <button class="sm3-touch-btn sm3-touch-btn--right" data-key="d" aria-label="Turn right">▶</button>
+</div>
+
+<!-- HELP HINT (bottom corner) -->
+<div class="sm3-help" id="sm3-help">
+  <kbd>WASD</kbd> sail · <kbd>Esc</kbd> exit · approach a glowing shore to read its story
+</div>
+
+<!-- THREE.js (CDN, no build) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script defer src="assets/story-mode.js"></script>
+</body>
+</html>

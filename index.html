@@ -4,12 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#FFFFFF" />
-<title>B The Change, Don't WAIT for change. Be the change.</title>
+<title>B The Change, Don't WAIT for change. B the change.</title>
 <meta name="description" content="A Hyderabad-based welfare society. Since 2006, 11 programs across India: education, health, women's empowerment, environment, animal welfare, legal aid. Reg 1538/2015 · 80G certified." />
 
 <!-- OpenGraph (Facebook, LinkedIn, WhatsApp link previews) -->
 <meta property="og:site_name" content="B The Change Welfare Society" />
-<meta property="og:title" content="B The Change, Don't WAIT for change. Be the change." />
+<meta property="og:title" content="B The Change, Don't WAIT for change. B the change." />
 <meta property="og:description" content="A Hyderabad-based welfare society. Since 2006, 11 programs across India: education, health, women's empowerment, environment, animal welfare, legal aid. Reg 1538/2015 · 80G certified." />
 <meta property="og:image" content="https://bthechange.in/assets/bthechange-logo.png" />
 <meta property="og:image:width" content="1200" />
@@ -19,7 +19,7 @@
 
 <!-- Twitter card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="B The Change, Don't WAIT for change. Be the change." />
+<meta name="twitter:title" content="B The Change, Don't WAIT for change. B the change." />
 <meta name="twitter:description" content="A Hyderabad-based welfare society. Since 2006, 11 programs across India: education, health, women's empowerment, environment, animal welfare, legal aid. Reg 1538/2015 · 80G certified." />
 <meta name="twitter:image" content="https://bthechange.in/assets/bthechange-logo.png" />
 
@@ -53,6 +53,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/style.css" />
+<script defer src="assets/page-transition.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script defer src="assets/supabase-config.js"></script>
 <script defer src="assets/admin-bell.js"></script>
@@ -66,6 +67,29 @@
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
+<div class="btc-preloader" id="btc-preloader" aria-hidden="true">
+  <div class="btc-preloader-row">
+    <div class="btc-preloader-word">
+      <span class="btc-preloader-text">WAIT</span>
+      <span class="btc-preloader-strike" aria-hidden="true"></span>
+    </div>
+    <span class="btc-preloader-be"><span class="btc-preloader-be-b">B</span> the change.</span>
+  </div>
+</div>
+<script>
+(function () {
+  var seen = false;
+  try { seen = sessionStorage.getItem('btc-preloader-seen') === '1'; } catch (e) {}
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var p = document.getElementById('btc-preloader');
+  if (seen || reduced) {
+    if (p && p.parentNode) p.parentNode.removeChild(p);
+    document.body.classList.add('is-hero-ready');
+  } else {
+    document.body.classList.add('is-preloading');
+  }
+})();
+</script>
 <div id="btc-toast-stack" class="btc-toast-stack" aria-live="polite" aria-atomic="true"></div>
 
 <div class="ann">
@@ -78,6 +102,7 @@
     <span>·</span>
     <span>NITI AAYOG TS/2023/0380583</span>
   </div>
+  <span class="ann-scrubber" id="ann-scrubber" aria-hidden="true"></span>
 </div>
 
 <header class="hdr" id="hdr">
@@ -135,18 +160,24 @@
 
 <main id="main">
 
-  <section class="hero hero--with-photo" style="background-image: url('assets/hero-kids-coding.jpg');">
+  <section class="hero hero--with-photo" style="background-image: url('assets/coding-bus-clean.jpg');">
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-text" data-reveal>
           <div class="hero-eyebrow">A LEGACY SINCE 2006 · REG 1538/2015</div>
-          <h1 class="hero-h1">Don't <span class="strike">WAIT</span><br />for change.<br /><span class="be">Be</span> the change.</h1>
+          <h1 class="hero-h1">Don't <span class="strike">WAIT</span><br />for change.<br /><span class="hero-h1-line"><span class="be">B</span> the change.</span></h1>
           <p class="hero-lede">Two decades. Eleven programs. Two hundred thousand lives quietly, stubbornly turned. We don't run on slogans. We run on showing up.</p>
           <div class="hero-cta">
             <a href="awards.html" class="btn btn--accent btn--lg">B The Change Awards <span class="arrow">→</span></a>
             <a href="#programs" class="btn btn--secondary btn--lg">See our programs</a>
           </div>
+          <a href="story-mode.html" class="story-mode-cta" aria-label="Enter immersive story mode">
+            <span class="smc-pulse" aria-hidden="true"></span>
+            <span class="smc-label">Enter Story Mode</span>
+            <span class="smc-arrow" aria-hidden="true">→</span>
+          </a>
         </div>
+        <img class="hero-mobile-photo" src="assets/coding-bus-students.jpg" alt="Students learning to code on the Coding on Wheels bus" loading="lazy" />
       </div>
     </div>
   </section>
@@ -158,6 +189,36 @@
         <div><div class="hero-stat-num"><span data-count="200000">200,000</span>+</div><div class="hero-stat-lbl">LIVES TOUCHED</div></div>
         <div><div class="hero-stat-num"><span data-count="11">11</span></div><div class="hero-stat-lbl">PROGRAMS</div></div>
         <div><div class="hero-stat-num">2<span class="serif-it" style="color:var(--accent);">/2</span></div><div class="hero-stat-lbl">COUNTRIES</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news-fold">
+    <div class="wrap">
+      <div class="news-fold-head" data-reveal>
+        <div class="news-fold-mast">B THE CHANGE <span class="accent">GAZETTE</span></div>
+        <div class="news-fold-line"></div>
+        <div class="news-fold-edition">VOL XX · MAY 2026 · DISPATCHES FROM THE FIELD</div>
+      </div>
+      <div class="news-fold-grid">
+        <article class="news-fold-story" data-reveal style="--d: 0ms;">
+          <div class="news-fold-tag">EDUCATION · ADILABAD</div>
+          <h3>First Python program from a <em>village</em> classroom.</h3>
+          <p>Arjun, Class 9, sat through three months of after-school sessions on a Coding-on-Wheels van that visits his Adilabad school every fortnight. Last Tuesday he wrote his first working script. His mother does not know what it does. She knows what it means.</p>
+          <a href="programs/coding-on-wheels.html">Read the dispatch →</a>
+        </article>
+        <article class="news-fold-story" data-reveal style="--d: 100ms;">
+          <div class="news-fold-tag">ENVIRONMENT · TELANGANA</div>
+          <h3>PIL halts felling on <em>400 acres</em> of forest land.</h3>
+          <p>Filed under the EKO Warriors banner in 2023, the petition wound through three benches before a stay order arrived in February. The forest, identified for a private resort, will instead be re-surveyed for community use under the FRA. Nine years of advocacy, one signature.</p>
+          <a href="programs/eko-warriors.html">Read the dispatch →</a>
+        </article>
+        <article class="news-fold-story" data-reveal style="--d: 200ms;">
+          <div class="news-fold-tag">HEALTH · HYDERABAD</div>
+          <h3>Donor card <em>signed</em> at a college talk saves a stranger.</h3>
+          <p>Two years after Fathima signed her card at a Donation-on-Wheels session, her father's corneas restored sight to a man she will never meet. She is now in her final year of medical school. The campaign continues across thirty-one campuses this term.</p>
+          <a href="programs/organ-donation-on-wheels.html">Read the dispatch →</a>
+        </article>
       </div>
     </div>
   </section>
@@ -174,7 +235,7 @@
 
       <div class="programs-grid programs-grid--asym">
         
-        <a href="programs/coding-on-wheels.html" class="program-card" data-reveal style="--d: 0ms; --card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #FFE4D6 0%, #FFCBA4 100%); --card-tint: #DC4F1A1A;">
+        <a href="programs/coding-on-wheels.html" class="program-card" data-reveal style="--d: 0ms; --card-color: #1A365D; --card-bg: linear-gradient(135deg, #FFE4D6 0%, #FFCBA4 100%); --card-tint: #1A365D1A;">
           <div class="pc-num">
             <span><strong>01</strong> · CODING</span>
             <span class="pc-num-arr">→</span>
@@ -183,7 +244,7 @@
           <h3>Coding on Wheels</h3>
           <p>Bridging India's digital divide through code, AI &amp; robotics.</p>
         </a>
-        <a href="programs/changemakers.html" class="program-card" data-reveal style="--d: 50ms; --card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #FFF4E0 0%, #FFD8A0 100%); --card-tint: #DC4F1A1A;">
+        <a href="programs/changemakers.html" class="program-card" data-reveal style="--d: 50ms; --card-color: #1A365D; --card-bg: linear-gradient(135deg, #FFF4E0 0%, #FFD8A0 100%); --card-tint: #1A365D1A;">
           <div class="pc-num">
             <span><strong>02</strong> · CHANGEMAKERS</span>
             <span class="pc-num-arr">→</span>
@@ -192,7 +253,7 @@
           <h3>Changemakers</h3>
           <p>Be the spark. Lead the change.</p>
         </a>
-        <a href="programs/organ-donation-on-wheels.html" class="program-card" data-reveal style="--d: 100ms; --card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #FFE0E0 0%, #FFB0B0 100%); --card-tint: #DC4F1A1A;">
+        <a href="programs/organ-donation-on-wheels.html" class="program-card" data-reveal style="--d: 100ms; --card-color: #1A365D; --card-bg: linear-gradient(135deg, #FFE0E0 0%, #FFB0B0 100%); --card-tint: #1A365D1A;">
           <div class="pc-num">
             <span><strong>03</strong> · ORGAN</span>
             <span class="pc-num-arr">→</span>
@@ -246,7 +307,7 @@
           <h3>Cross Connect Legal Aid</h3>
           <p>From immigration to reconciliation, we stand with you.</p>
         </a>
-        <a href="programs/dreamcatchers.html" class="program-card" data-reveal style="--d: 400ms; --card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #FFE8E0 0%, #FFB8A0 100%); --card-tint: #DC4F1A1A;">
+        <a href="programs/dreamcatchers.html" class="program-card" data-reveal style="--d: 400ms; --card-color: #1A365D; --card-bg: linear-gradient(135deg, #FFE8E0 0%, #FFB8A0 100%); --card-tint: #1A365D1A;">
           <div class="pc-num">
             <span><strong>09</strong> · DREAMCATCHERS</span>
             <span class="pc-num-arr">→</span>
@@ -255,7 +316,7 @@
           <h3>DreamCatchers</h3>
           <p>From dreams to reality.</p>
         </a>
-        <a href="programs/launchpad.html" class="program-card" data-reveal style="--d: 450ms; --card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #FFF0DC 0%, #FFD8A0 100%); --card-tint: #DC4F1A1A;">
+        <a href="programs/launchpad.html" class="program-card" data-reveal style="--d: 450ms; --card-color: #1A365D; --card-bg: linear-gradient(135deg, #FFF0DC 0%, #FFD8A0 100%); --card-tint: #1A365D1A;">
           <div class="pc-num">
             <span><strong>10</strong> · LAUNCHPAD</span>
             <span class="pc-num-arr">→</span>
@@ -264,7 +325,7 @@
           <h3>Launchpad</h3>
           <p>First job. First salary. First step.</p>
         </a>
-        <a href="programs/lawgic.html" class="program-card" data-reveal style="--d: 500ms; --card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #F0EDE5 0%, #D9D2BE 100%); --card-tint: #DC4F1A1A;">
+        <a href="programs/lawgic.html" class="program-card" data-reveal style="--d: 500ms; --card-color: #1A365D; --card-bg: linear-gradient(135deg, #F0EDE5 0%, #D9D2BE 100%); --card-tint: #1A365D1A;">
           <div class="pc-num">
             <span><strong>11</strong> · L.A.W.G.I.C.</span>
             <span class="pc-num-arr">→</span>
@@ -302,6 +363,7 @@
                 <div class="foundation-text-body">
                   <div class="kicker"><span class="mono accent">FOUNDER'S NOTE · RAM CHALLA</span></div>
                   <h2>It started with <em>one</em> question.</h2>
+                  <div class="one-question" id="one-question" data-question="Why are 200,000 children still waiting?" data-answer="They're not. Not anymore."><span class="one-question-text"></span><span class="one-question-caret" aria-hidden="true"></span></div>
                   <p><strong>Ram Challa</strong>, founder of B The Change Welfare Society, has spent two decades doing one thing extraordinarily well: showing up. A practising <strong>lawyer and UK Solicitor</strong>, he has filed PILs that protected forests, built classrooms that taught a generation Python, and stood with families across India and the UK. <a href="about.html" class="inline-link">Know work →</a></p>
                 </div>
 
@@ -380,30 +442,29 @@
         <div class="kicker"><span class="mono accent">VOICES · ON THE GROUND</span></div>
         <h2>Stories <em>they</em> wrote.</h2>
       </div>
-      <div class="programs-grid programs-grid--3">
-        
-        <article class="program-card program-card--withfoot" data-reveal style="--card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #FFE4D6 0%, #FFCBA4 100%); --card-tint: #DC4F1A1A;">
-          <div class="pc-num"><strong>CODING</strong></div>
-          <p style="font-family:var(--font-serif); font-style: italic; font-size: 17px; color: var(--ink); margin: 18px 0; line-height: 1.5;">"I am the first person in my village to write a Python program. My amma still doesn't quite understand what I do, but she knows I'll never be a daily-wage labourer."</p>
-          <div class="program-card-foot" style="border-top: 1px solid var(--line);">
-            <div style="font-family: var(--font-mono); font-weight: 700; font-size: 9.5px; letter-spacing: 1.6px; color: var(--mute);">ARJUN · CLASS 9 · ADILABAD</div>
-            <a href="programs/coding-on-wheels.html" class="program-card-go">Read more →</a>
+      <div class="voices-pinboard" id="voices-pinboard">
+        <article class="pin-card">
+          <div class="pin-tag">CODING</div>
+          <p class="pin-quote">"I am the first person in my village to write a Python program. My amma still doesn't quite understand what I do, but she knows I'll never be a daily-wage labourer."</p>
+          <div class="pin-author">
+            <div>ARJUN · CLASS 9 · ADILABAD</div>
+            <a href="programs/coding-on-wheels.html" class="pin-link">Read more →</a>
           </div>
         </article>
-        <article class="program-card program-card--withfoot" data-reveal style="--card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #FFF4E0 0%, #FFD8A0 100%); --card-tint: #DC4F1A1A;">
-          <div class="pc-num"><strong>CHANGEMAKERS</strong></div>
-          <p style="font-family:var(--font-serif); font-style: italic; font-size: 17px; color: var(--ink); margin: 18px 0; line-height: 1.5;">"I was 67 when I started organising my colony's water-supply complaint. Now I run the WhatsApp group for three wards."</p>
-          <div class="program-card-foot" style="border-top: 1px solid var(--line);">
-            <div style="font-family: var(--font-mono); font-weight: 700; font-size: 9.5px; letter-spacing: 1.6px; color: var(--mute);">KAMALA · 71 · WARD 13, SECUNDERABAD</div>
-            <a href="programs/changemakers.html" class="program-card-go">Read more →</a>
+        <article class="pin-card">
+          <div class="pin-tag">CHANGEMAKERS</div>
+          <p class="pin-quote">"I was 67 when I started organising my colony's water-supply complaint. Now I run the WhatsApp group for three wards."</p>
+          <div class="pin-author">
+            <div>KAMALA · 71 · WARD 13, SECUNDERABAD</div>
+            <a href="programs/changemakers.html" class="pin-link">Read more →</a>
           </div>
         </article>
-        <article class="program-card program-card--withfoot" data-reveal style="--card-color: #DC4F1A; --card-bg: linear-gradient(135deg, #FFE0E0 0%, #FFB0B0 100%); --card-tint: #DC4F1A1A;">
-          <div class="pc-num"><strong>ORGAN</strong></div>
-          <p style="font-family:var(--font-serif); font-style: italic; font-size: 17px; color: var(--ink); margin: 18px 0; line-height: 1.5;">"I signed the donor card after their session at my college. Two years later, my father's eyes saved someone else's vision. The circle closed."</p>
-          <div class="program-card-foot" style="border-top: 1px solid var(--line);">
-            <div style="font-family: var(--font-mono); font-weight: 700; font-size: 9.5px; letter-spacing: 1.6px; color: var(--mute);">FATHIMA · 24 · MEDICAL STUDENT</div>
-            <a href="programs/organ-donation-on-wheels.html" class="program-card-go">Read more →</a>
+        <article class="pin-card">
+          <div class="pin-tag">ORGAN</div>
+          <p class="pin-quote">"I signed the donor card after their session at my college. Two years later, my father's eyes saved someone else's vision. The circle closed."</p>
+          <div class="pin-author">
+            <div>FATHIMA · 24 · MEDICAL STUDENT</div>
+            <a href="programs/organ-donation-on-wheels.html" class="pin-link">Read more →</a>
           </div>
         </article>
       </div>
@@ -422,7 +483,7 @@
           <h3 style="color: var(--paper);">Power a <em style="font-family: var(--font-serif); font-style: italic; color: var(--accent);">whole</em> program for a year.</h3>
           <p style="color: rgba(255,255,255,.75);">Four partnership tiers from ₹1,00,000 to ₹5,00,000+. CSR-1 eligible. 80G receipts. Quarterly impact reports. Site visits.</p>
           <div class="program-card-foot" style="border-top-color: rgba(255,255,255,.15);">
-            <div class="program-card-tag" style="background: rgba(220,79,26,.2); color: var(--accent);">CSR · 80G · 12A</div>
+            <div class="program-card-tag" style="background: rgba(26,54,93,.2); color: var(--accent);">CSR · 80G · 12A</div>
             <div class="program-card-go" style="color: var(--paper);">Talk on WhatsApp →</div>
           </div>
         </a>
@@ -457,10 +518,10 @@
         </div>
         <div data-reveal style="--d: 200ms">
           <div class="final-amounts">
-            <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20as%20a%20Community%20Partner%20(%E2%82%B91%2C00%2C000)." target="_blank" rel="noopener" class="amt-btn"><span class="a">₹1,00,000</span><span class="b">COMMUNITY PARTNER</span></a>
-            <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20as%20an%20Impact%20Partner%20(%E2%82%B92%2C00%2C000)." target="_blank" rel="noopener" class="amt-btn"><span class="a">₹2,00,000</span><span class="b">IMPACT PARTNER</span></a>
-            <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20as%20a%20Premier%20Partner%20(%E2%82%B93%2C50%2C000)." target="_blank" rel="noopener" class="amt-btn"><span class="a">₹3,50,000</span><span class="b">PREMIER PARTNER</span></a>
-            <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20as%20a%20Legacy%20Patron%20(%E2%82%B95%2C00%2C000)." target="_blank" rel="noopener" class="amt-btn"><span class="a">₹5,00,000</span><span class="b">LEGACY PATRON</span></a>
+            <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20as%20a%20Community%20Partner%20(%E2%82%B91%2C00%2C000)." target="_blank" rel="noopener" class="amt-btn" style="--pct: 20%;"><span class="a">₹1,00,000</span><span class="b">COMMUNITY PARTNER</span><span class="amt-btn-bar"><span class="amt-btn-bar-fill"></span></span></a>
+            <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20as%20an%20Impact%20Partner%20(%E2%82%B92%2C00%2C000)." target="_blank" rel="noopener" class="amt-btn" style="--pct: 40%;"><span class="a">₹2,00,000</span><span class="b">IMPACT PARTNER</span><span class="amt-btn-bar"><span class="amt-btn-bar-fill"></span></span></a>
+            <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20as%20a%20Premier%20Partner%20(%E2%82%B93%2C50%2C000)." target="_blank" rel="noopener" class="amt-btn" style="--pct: 70%;"><span class="a">₹3,50,000</span><span class="b">PREMIER PARTNER</span><span class="amt-btn-bar"><span class="amt-btn-bar-fill"></span></span></a>
+            <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20as%20a%20Legacy%20Patron%20(%E2%82%B95%2C00%2C000)." target="_blank" rel="noopener" class="amt-btn" style="--pct: 100%;"><span class="a">₹5,00,000</span><span class="b">LEGACY PATRON</span><span class="amt-btn-bar"><span class="amt-btn-bar-fill"></span></span></a>
             <a href="https://wa.me/919000935898?text=Hi%2C%20I%20want%20to%20partner%20with%20B%20The%20Change%20Welfare%20Society." target="_blank" rel="noopener" class="amt-btn amt-btn--primary">Become a partner <span class="arrow">→</span></a>
           </div>
           <div class="final-foot">AXIS BANK · DIRECT TRANSFER · QUARTERLY IMPACT REPORT</div>
@@ -536,7 +597,7 @@
           <span class="auth-reg-tag">REG NO 1538/2015</span>
         </div>
         <div class="auth-kicker"><span>SIGN IN · STEP 01 OF 02</span></div>
-        <h2 class="auth-h1">Don't <span class="strike">WAIT</span> for change.<br /><span class="be">Be</span> the change.</h2>
+        <h2 class="auth-h1">Don't <span class="strike">WAIT</span> for change.<br /><span class="be">B</span> the change.</h2>
         <p class="auth-lede">Sign in to share stories, volunteer, or manage submissions. We'll send a 6-digit code to verify it's you.</p>
         <div class="auth-decor"><span></span></div>
         <div class="auth-tabs">
@@ -646,6 +707,124 @@ function countUp(el) {
 }
 const countObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); countObserver.unobserve(e.target); } }); }, { threshold: 0.5 });
 document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+/* PARTNERSHIP TIER BAR FILL — animate on viewport entry */
+(function () {
+  const finalCta = document.querySelector('.final-cta');
+  if (!finalCta) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        finalCta.classList.add('is-bars-in');
+        obs.unobserve(finalCta);
+      }
+    });
+  }, { threshold: 0.35 });
+  obs.observe(finalCta);
+})();
+
+/* PRELOADER DISMISS — runs only if inline gate set is-preloading */
+(function () {
+  if (!document.body.classList.contains('is-preloading')) return;
+  const p = document.getElementById('btc-preloader');
+  if (!p) { document.body.classList.add('is-hero-ready'); return; }
+  const TOTAL = 2500;
+  setTimeout(() => {
+    p.classList.add('is-leaving');
+    document.body.classList.remove('is-preloading');
+    document.body.classList.add('is-hero-ready');
+    try { sessionStorage.setItem('btc-preloader-seen', '1'); } catch (e) {}
+    setTimeout(() => { if (p.parentNode) p.parentNode.removeChild(p); }, 800);
+  }, TOTAL);
+})();
+
+/* TOP-BAR SCRUBBER DOT — moves along .ann strip with scroll progress */
+(function () {
+  const scrubber = document.getElementById('ann-scrubber');
+  const ann = document.querySelector('.ann');
+  if (!scrubber || !ann) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let rafId = null;
+  function update() {
+    rafId = null;
+    const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = totalScrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / totalScrollable)) : 0;
+    scrubber.style.left = (progress * 100) + '%';
+  }
+  function onScroll() {
+    if (reduced) { update(); return; }
+    if (rafId == null) rafId = requestAnimationFrame(update);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { if (rafId == null) rafId = requestAnimationFrame(update); });
+  update();
+})();
+
+/* VOICES PINBOARD — staggered fly-in on viewport entry */
+(function () {
+  const board = document.getElementById('voices-pinboard');
+  if (!board) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        board.classList.add('is-in');
+        obs.unobserve(board);
+      }
+    });
+  }, { threshold: 0.2 });
+  obs.observe(board);
+})();
+
+/* ONE QUESTION TYPEWRITER — types question, strikes it, types answer */
+(function () {
+  const oq = document.getElementById('one-question');
+  if (!oq) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const question = oq.dataset.question || '';
+  const answer = oq.dataset.answer || '';
+  const textEl = oq.querySelector('.one-question-text');
+  if (!textEl) return;
+  if (reduced) {
+    textEl.textContent = question;
+    textEl.classList.add('is-struck');
+    const ans = document.createElement('span');
+    ans.className = 'one-question-answer';
+    ans.textContent = answer;
+    oq.appendChild(ans);
+    oq.classList.add('is-done');
+    return;
+  }
+  let started = false;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting && !started) { started = true; obs.unobserve(oq); play(); } });
+  }, { threshold: 0.4 });
+  obs.observe(oq);
+  function typeText(target, text, speed) {
+    return new Promise((resolve) => {
+      let i = 0;
+      target.textContent = '';
+      const tick = () => {
+        target.textContent = text.slice(0, ++i);
+        if (i >= text.length) return resolve();
+        setTimeout(tick, speed);
+      };
+      tick();
+    });
+  }
+  async function play() {
+    await typeText(textEl, question, 38);
+    await new Promise(r => setTimeout(r, 700));
+    textEl.classList.add('is-struck');
+    await new Promise(r => setTimeout(r, 650));
+    const ans = document.createElement('span');
+    ans.className = 'one-question-answer';
+    oq.appendChild(ans);
+    await typeText(ans, answer, 48);
+    await new Promise(r => setTimeout(r, 400));
+    oq.classList.add('is-done');
+  }
+})();
+
 (function() {
   const modal = document.getElementById('auth-modal'); if (!modal) return;
   const closeBtn = document.getElementById('auth-close');

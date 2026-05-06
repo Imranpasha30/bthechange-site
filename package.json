@@ -1,0 +1,28 @@
+{
+  "name": "bthechange-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "B The Change Welfare Society — public site + immersive 3D Story Mode. Pure static HTML/CSS/JS, no build step.",
+  "scripts": {
+    "dev": "npx --yes http-server . -p 8765 -c-1 --cors",
+    "start": "npx --yes http-server . -p 8765 -c-1 --cors",
+    "preview:vercel": "npx --yes vercel dev",
+    "preview:netlify": "npx --yes netlify dev",
+    "preview:docker": "docker build -t btc-site . && docker run --rm -p 8080:8080 btc-site"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "homepage": "https://bthechange.in",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Imranpasha30/bthechange-site"
+  },
+  "keywords": [
+    "ngo",
+    "static-site",
+    "three.js",
+    "supabase"
+  ],
+  "license": "UNLICENSED"
+}
