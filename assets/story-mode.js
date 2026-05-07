@@ -20,17 +20,17 @@
 
   /* ---------- DATA ---------- */
   var SHORE_DATA = [
-    { num: '01', tag: 'EDUCATION · ADILABAD',          title: 'Coding on Wheels',           text: 'A van teaching code, AI and robotics where schools never reached.', link: 'programs/coding-on-wheels.html',          color: 0xf4a23a },
-    { num: '02', tag: 'CIVIC · SECUNDERABAD',          title: 'Changemakers',               text: 'Civic action lit by ordinary people.',                                link: 'programs/changemakers.html',              color: 0x6ab8c9 },
-    { num: '03', tag: 'HEALTH · HYDERABAD',            title: 'Organ Donation Campaign',    text: 'Cards signed. Sight returned. Lives extended.',                       link: 'programs/organ-donation-on-wheels.html',  color: 0xe85d6b },
-    { num: '04', tag: 'ENVIRONMENT · TELANGANA',       title: 'EKO Warriors',               text: 'Petitions, surveys, forests still standing.',                         link: 'programs/eko-warriors.html',              color: 0x6ed089 },
-    { num: '05', tag: 'ANIMAL WELFARE · ALMASGUDA',    title: 'PAWtection Force',           text: 'Guardians for those who cannot ask.',                                 link: 'programs/pawtection-force.html',          color: 0xb89674 },
-    { num: '06', tag: 'DIGNITY · TELANGANA',           title: 'WE: Women Empowerment',      text: 'Economic dignity. Health awareness. Real autonomy.',                  link: 'programs/we-women-empowerment.html',      color: 0xe06bb4 },
-    { num: '07', tag: 'JUSTICE · UK & INDIA',          title: 'Global Human Rights Front',  text: 'Asylum, immigration, the long fight for status.',                    link: 'programs/global-human-rights-front.html', color: 0x5b89c4 },
-    { num: '08', tag: 'LEGAL · LONDON',                title: 'Cross Connect Legal Aid',    text: 'From immigration to reconciliation, we stand with you.',              link: 'programs/cross-connect-legal-aid.html',   color: 0x8a8e96 },
-    { num: '09', tag: 'EDUCATION · NIZAMABAD',         title: 'DreamCatchers',              text: 'After-school tutoring, scholarships, futures.',                       link: 'programs/dreamcatchers.html',             color: 0xf4d03f },
-    { num: '10', tag: 'LIVELIHOOD · HYDERABAD',        title: 'Launchpad',                  text: 'First job. First salary. First step.',                                link: 'programs/launchpad.html',                 color: 0xff8855 },
-    { num: '11', tag: 'PRO-BONO · INDIA',              title: 'L.A.W.G.I.C.',               text: 'Free legal aid for those the system forgets.',                        link: 'programs/lawgic.html',                    color: 0xa886ff }
+    { num: '01', tag: 'EDUCATION · ADILABAD',          title: 'Coding on Wheels',           text: 'A van teaching code, AI and robotics where schools never reached.', link: 'programs/coding-on-wheels.html',          color: 0xf4a23a, glyph: '</>',  theme: 'coding'    },
+    { num: '02', tag: 'CIVIC · SECUNDERABAD',          title: 'Changemakers',               text: 'Civic action lit by ordinary people.',                                link: 'programs/changemakers.html',              color: 0x6ab8c9, glyph: '✊', theme: 'civic'   },
+    { num: '03', tag: 'HEALTH · HYDERABAD',            title: 'Organ Donation Campaign',    text: 'Cards signed. Sight returned. Lives extended.',                       link: 'programs/organ-donation-on-wheels.html',  color: 0xe85d6b, glyph: '♥', theme: 'organ'   },
+    { num: '04', tag: 'ENVIRONMENT · TELANGANA',       title: 'EKO Warriors',               text: 'Petitions, surveys, forests still standing.',                         link: 'programs/eko-warriors.html',              color: 0x6ed089, glyph: '⚘', theme: 'eko'     },
+    { num: '05', tag: 'ANIMAL WELFARE · ALMASGUDA',    title: 'PAWtection Force',           text: 'Guardians for those who cannot ask.',                                 link: 'programs/pawtection-force.html',          color: 0xb89674, glyph: '✿', theme: 'paw'     },
+    { num: '06', tag: 'DIGNITY · TELANGANA',           title: 'WE: Women Empowerment',      text: 'Economic dignity. Health awareness. Real autonomy.',                  link: 'programs/we-women-empowerment.html',      color: 0xe06bb4, glyph: '♀', theme: 'we'      },
+    { num: '07', tag: 'JUSTICE · UK & INDIA',          title: 'Global Human Rights Front',  text: 'Asylum, immigration, the long fight for status.',                    link: 'programs/global-human-rights-front.html', color: 0x5b89c4, glyph: '♁', theme: 'global'  },
+    { num: '08', tag: 'LEGAL · LONDON',                title: 'Cross Connect Legal Aid',    text: 'From immigration to reconciliation, we stand with you.',              link: 'programs/cross-connect-legal-aid.html',   color: 0x8a8e96, glyph: '⚖', theme: 'cross'   },
+    { num: '09', tag: 'EDUCATION · NIZAMABAD',         title: 'DreamCatchers',              text: 'After-school tutoring, scholarships, futures.',                       link: 'programs/dreamcatchers.html',             color: 0xf4d03f, glyph: '★', theme: 'dream'   },
+    { num: '10', tag: 'LIVELIHOOD · HYDERABAD',        title: 'Launchpad',                  text: 'First job. First salary. First step.',                                link: 'programs/launchpad.html',                 color: 0xff8855, glyph: '▲', theme: 'launch'  },
+    { num: '11', tag: 'PRO-BONO · INDIA',              title: 'L.A.W.G.I.C.',               text: 'Free legal aid for those the system forgets.',                        link: 'programs/lawgic.html',                    color: 0xa886ff, glyph: '§', theme: 'lawgic'  }
   ];
 
   /* 3 lore points per program (3 × 11 = 33 entries) */
@@ -319,122 +319,264 @@
   /* ============================================================
      SHIP — same as v3
      ============================================================ */
-  function buildShip() {
+  /* ============================================================
+     ROWBOAT — small wooden boat with red rim, plank seats, and a
+     seated rower with a paddle. Replaces the old schooner.
+     The rower's arms + chest + paddle are exposed via userData
+     so the animation loop can drive a realistic paddling cycle.
+     ============================================================ */
+  function buildRowboat() {
     var g = new THREE.Group();
-    var darkWood   = new THREE.MeshStandardMaterial({ color: 0x4a2e18, roughness: 0.88 });
-    var midWood    = new THREE.MeshStandardMaterial({ color: 0x6b4423, roughness: 0.85 });
-    var lightWood  = new THREE.MeshStandardMaterial({ color: 0x9a7546 });
-    var deckPlank  = new THREE.MeshStandardMaterial({ color: 0xb59365 });
-    var paintedHull= new THREE.MeshStandardMaterial({ color: 0x1a365d, metalness: 0.18, roughness: 0.55 });
-    var canvasMat  = new THREE.MeshStandardMaterial({ color: 0xeae0c8, side: THREE.DoubleSide });
-    var sailMat    = new THREE.MeshStandardMaterial({ color: 0xf4ecdb, side: THREE.DoubleSide });
-    var brassMat   = new THREE.MeshStandardMaterial({ color: 0xc59a4f, metalness: 0.85, roughness: 0.35 });
-    var ropeMat    = new THREE.LineBasicMaterial({ color: 0x352010, transparent: true, opacity: 0.9 });
+    var darkWood  = new THREE.MeshStandardMaterial({ color: 0x6b4423, roughness: 0.9 });
+    var midWood   = new THREE.MeshStandardMaterial({ color: 0x9a7546, roughness: 0.85 });
+    var lightWood = new THREE.MeshStandardMaterial({ color: 0xc4a574, roughness: 0.82 });
+    var redRim    = new THREE.MeshStandardMaterial({ color: 0xb53a2a, roughness: 0.65, metalness: 0.1 });
+    var skinMat   = new THREE.MeshStandardMaterial({ color: 0xc78a5e, roughness: 0.7 });
+    var shirtMat  = new THREE.MeshStandardMaterial({ color: 0x1a365d, roughness: 0.7 });
+    var pantsMat  = new THREE.MeshStandardMaterial({ color: 0x3a2410, roughness: 0.85 });
 
-    var hullShape = new THREE.Shape();
-    hullShape.moveTo(-6.5, 0);
-    hullShape.bezierCurveTo(-7.2, 0.2, -7.2, 1.6, -6.0, 2.0);
-    hullShape.lineTo(6.0, 2.0);
-    hullShape.bezierCurveTo(7.5, 2.0, 7.8, 1.0, 7.0, 0.0);
-    hullShape.bezierCurveTo(5.0, -0.4, -4.0, -0.4, -6.5, 0);
-    var hullExtrude = { depth: 4.2, bevelEnabled: true, bevelThickness: 0.25, bevelSize: 0.22, bevelSegments: 4, curveSegments: 14 };
-    var hullGeo = new THREE.ExtrudeGeometry(hullShape, hullExtrude); hullGeo.center();
-    var hullLower = new THREE.Mesh(hullGeo, darkWood); hullLower.position.y = 0.6; g.add(hullLower);
-
-    var upperShape = new THREE.Shape();
-    upperShape.moveTo(-6.0, 0);
-    upperShape.lineTo(-5.5, 1.2); upperShape.lineTo(6.5, 1.2);
-    upperShape.bezierCurveTo(7.2, 1.0, 7.2, 0.2, 6.2, 0);
-    upperShape.lineTo(-6.0, 0);
-    var upperGeo = new THREE.ExtrudeGeometry(upperShape, { depth: 3.6, bevelEnabled: true, bevelThickness: 0.15, bevelSize: 0.12, bevelSegments: 3, curveSegments: 10 });
-    upperGeo.center();
-    var upperHull = new THREE.Mesh(upperGeo, paintedHull); upperHull.position.y = 2.0; g.add(upperHull);
-
-    var deck = new THREE.Mesh(new THREE.BoxGeometry(13.5, 0.18, 3.6), deckPlank); deck.position.y = 3.0; g.add(deck);
-    for (var pl = 0; pl < 6; pl++) {
-      var seam = new THREE.Mesh(new THREE.BoxGeometry(13.0, 0.02, 0.04), darkWood);
-      seam.position.set(0, 3.10, -1.5 + pl * 0.6); g.add(seam);
+    /* HULL — proper boat with a HOLLOW interior. The outer almond shape
+       has a hole punched through (the cavity opening), so the extruded
+       geometry is just the WALLS of the boat — no closed top, no closed
+       middle. Below we add a separate floor at the bottom of the hollow. */
+    function almondPath(useShape, w, h, scale) {
+      var s = scale || 1;
+      var path = useShape ? new THREE.Shape() : new THREE.Path();
+      path.moveTo(w * s, 0);
+      path.bezierCurveTo(w * 0.93 * s,  h * 0.58 * s,  w * 0.48 * s,  h * s,        0,  h * s);
+      path.bezierCurveTo(-w * 0.48 * s, h * s,        -w * 0.93 * s,  h * 0.58 * s, -w * s, 0);
+      path.bezierCurveTo(-w * 0.93 * s,-h * 0.58 * s, -w * 0.48 * s, -h * s,        0, -h * s);
+      path.bezierCurveTo(w * 0.48 * s, -h * s,         w * 0.93 * s, -h * 0.58 * s,  w * s, 0);
+      return path;
     }
-    /* Helper: create mesh, set position, return — Three.js position is read-only Vector3 */
-    function placed(geo, mat, x, y, z) {
-      var m = new THREE.Mesh(geo, mat);
-      m.position.set(x, y, z);
-      return m;
+    var hullOuter = almondPath(true,  2.7, 0.95);
+    var cavityHole = almondPath(false, 2.0, 0.72);
+    hullOuter.holes.push(cavityHole);
+    /* Extruding the outer-with-hole creates the hull walls only — the boat is now
+       genuinely hollow, you can see down INTO it from above */
+    var hullExtrude = { depth: 0.78, bevelEnabled: true, bevelThickness: 0.08, bevelSize: 0.08, bevelSegments: 4, curveSegments: 20 };
+    var hullGeo = new THREE.ExtrudeGeometry(hullOuter, hullExtrude);
+    hullGeo.rotateX(-Math.PI / 2);
+    var hull = new THREE.Mesh(hullGeo, midWood); hull.position.y = 0.10; g.add(hull);
+
+    /* OUTER HULL SKIN — a slightly bigger almond extruded all the way down
+       to give the boat a real "submerged keel" silhouette from the side */
+    var keelShape = almondPath(true, 2.85, 1.0);
+    var keelGeo = new THREE.ExtrudeGeometry(keelShape, { depth: 0.55, bevelEnabled: true, bevelThickness: 0.18, bevelSize: 0.20, bevelSegments: 5, curveSegments: 20 });
+    keelGeo.rotateX(-Math.PI / 2);
+    var keel = new THREE.Mesh(keelGeo, darkWood);
+    keel.position.y = -0.40;
+    g.add(keel);
+
+    /* INTERIOR FLOOR — sits at the bottom of the hollow space.
+       Lighter wood so it reads as the boat's floor planks vs the dark walls. */
+    var floorShape = almondPath(true, 1.95, 0.70);
+    var floorGeo = new THREE.ExtrudeGeometry(floorShape, { depth: 0.06, bevelEnabled: false });
+    floorGeo.rotateX(-Math.PI / 2);
+    var floor = new THREE.Mesh(floorGeo, lightWood);
+    floor.position.y = 0.18;
+    g.add(floor);
+    /* Floor plank seams — thin dark lines running lengthwise for plank texture */
+    for (var fp = 0; fp < 5; fp++) {
+      var fz = -0.6 + fp * 0.3;
+      var seam = new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.01, 0.025), darkWood);
+      seam.position.set(0, 0.245, fz);
+      g.add(seam);
     }
-    [-1.85, 1.85].forEach(function (zSign) {
-      g.add(placed(new THREE.BoxGeometry(13.0, 0.5, 0.12), midWood, 0, 3.45, zSign));
-      g.add(placed(new THREE.BoxGeometry(13.0, 0.08, 0.18), darkWood, 0, 3.74, zSign));
-      for (var rb = 0; rb < 13; rb++) {
-        var bx = -6.0 + rb * 1.0;
-        g.add(placed(new THREE.BoxGeometry(0.08, 0.5, 0.08), midWood, bx, 3.45, zSign));
-      }
+
+    /* RED RIM — extruded ring matching the boat outline, sits atop the gunwale */
+    var rimOuter = almondPath(true, 2.7, 0.95);
+    rimOuter.holes.push(almondPath(false, 2.45, 0.83));
+    var rimGeo = new THREE.ExtrudeGeometry(rimOuter, { depth: 0.10, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.03, bevelSegments: 2, curveSegments: 18 });
+    rimGeo.rotateX(-Math.PI / 2);
+    var rim = new THREE.Mesh(rimGeo, redRim);
+    rim.position.y = 0.88;
+    g.add(rim);
+
+    /* INTERIOR RIBS — wooden ribs visible along the hollow walls (port + starboard).
+       These are the structural ribs you'd see in a real wooden rowboat. */
+    for (var rib = 0; rib < 5; rib++) {
+      var rx = -1.5 + rib * 0.75;
+      /* Port-side ribs (curve up the inside wall) */
+      var ribL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.62, 0.05), darkWood);
+      ribL.position.set(rx, 0.50, 0.65);
+      ribL.rotation.z = -0.08;
+      g.add(ribL);
+      var ribR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.62, 0.05), darkWood);
+      ribR.position.set(rx, 0.50, -0.65);
+      ribR.rotation.z = 0.08;
+      g.add(ribR);
+    }
+
+    /* STERN TRANSOM — vertical board across the back of the boat, common in real rowboats */
+    var transom = new THREE.Mesh(new THREE.BoxGeometry(0.10, 0.55, 1.2), darkWood);
+    transom.position.set(-2.45, 0.50, 0);
+    g.add(transom);
+
+    /* PLANK SEATS / THWARTS — 3 across the boat, span port-to-starboard,
+       sit just below the gunwale rim. The middle plank is where the rower sits. */
+    var plankMat = darkWood;
+    var seatPositions = [
+      { x: -1.4, w: 1.35 },     /* stern seat */
+      { x:  0.0, w: 1.55 },     /* middle (rower's seat, widest) */
+      { x:  1.4, w: 1.30 }      /* bow seat */
+    ];
+    seatPositions.forEach(function (s) {
+      /* Plank top — slight tan wood */
+      var plank = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.05, s.w), midWood);
+      plank.position.set(s.x, 0.86, 0);
+      g.add(plank);
+      /* Plank edge band (the visible "front" of the seat) */
+      var band = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.025, s.w), darkWood);
+      band.position.set(s.x, 0.835, 0);
+      g.add(band);
     });
 
-    var cabin = new THREE.Mesh(new THREE.BoxGeometry(3.0, 1.6, 2.6), lightWood);
-    cabin.position.set(-2.5, 3.95, 0); g.add(cabin);
-    g.add(placed(new THREE.BoxGeometry(3.3, 0.18, 2.9), darkWood, -2.5, 4.85, 0));
-    var winMat = new THREE.MeshStandardMaterial({ color: 0xffd070, emissive: 0xffaa44, emissiveIntensity: 0.55 });
-    [-1.0, 0, 1.0].forEach(function (wx) {
-      g.add(placed(new THREE.BoxGeometry(0.55, 0.55, 0.05), winMat, -2.5 + wx, 4.15, 1.31));
-      g.add(placed(new THREE.BoxGeometry(0.55, 0.55, 0.05), winMat, -2.5 + wx, 4.15, -1.31));
-    });
+    /* THWART CROSS-BRACE — diagonal wooden brace inside the hull
+       (between bow seat and floor, like a real boat structure) */
+    var brace = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.05, 0.06), midWood);
+    brace.position.set(0.7, 0.55, 0);
+    brace.rotation.z = -0.4;
+    g.add(brace);
 
-    var wheel = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.06, 6, 18), midWood);
-    wheel.position.set(0.7, 3.7, 0); wheel.rotation.y = Math.PI / 2; g.add(wheel);
-    for (var ws = 0; ws < 8; ws++) {
-      var spoke = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.05, 0.06), midWood);
-      spoke.position.set(0.7, 3.7, 0); spoke.rotation.x = (ws / 8) * Math.PI; spoke.rotation.y = Math.PI / 2;
-      g.add(spoke);
-    }
+    /* ROWER — seated figure facing the stern (he rows backward, looking
+       at where he's been). Body parts exposed for paddling animation.
+       Position lowered so the hip pivot lands FLUSH on the middle plank seat
+       (seat top at y=0.86; chest pivot is +0.55 above rower origin → rower.y=0.31). */
+    var rower = new THREE.Group();
+    rower.position.set(0.0, 0.31, 0);
+    /* Real rowers face the stern (look at the wake, pull toward the bow).
+       The boat's bow is +X model-space, so the rower should face -X.
+       Rotating the rower group -π/2 around Y puts him in the correct sitting pose. */
+    rower.rotation.y = -Math.PI / 2;
+    g.add(rower);
 
-    var mainMast = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.18, 9.5, 10), midWood);
-    mainMast.position.set(2.0, 7.0, 0); g.add(mainMast);
-    var mainYard = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 5.5, 8), midWood);
-    mainYard.rotation.x = Math.PI / 2; mainYard.position.set(2.0, 9.5, 0); g.add(mainYard);
-    var mainSail = new THREE.Mesh(new THREE.PlaneGeometry(5.0, 4.0, 8, 6), sailMat);
-    mainSail.position.set(2.0, 7.6, 0); mainSail.rotation.y = Math.PI / 2; g.add(mainSail);
-    var topSail = new THREE.Mesh(new THREE.PlaneGeometry(3.5, 2.2, 6, 4), canvasMat);
-    topSail.position.set(2.0, 10.6, 0); topSail.rotation.y = Math.PI / 2; g.add(topSail);
+    /* Chest — leans forward/back during the stroke */
+    var chest = new THREE.Group();
+    chest.position.y = 0.55;     /* hip pivot */
+    rower.add(chest);
+    var torso = new THREE.Mesh(new THREE.CylinderGeometry(0.30, 0.36, 0.85, 12), shirtMat);
+    torso.position.y = 0.42;
+    chest.add(torso);
+    /* Head */
+    var head = new THREE.Mesh(new THREE.SphereGeometry(0.24, 14, 10), skinMat);
+    head.position.y = 1.0;
+    chest.add(head);
+    var hair = new THREE.Mesh(
+      new THREE.SphereGeometry(0.26, 14, 10, 0, Math.PI * 2, 0, Math.PI * 0.55),
+      new THREE.MeshStandardMaterial({ color: 0x2a1a0a, roughness: 0.95 })
+    );
+    hair.position.y = 1.05;
+    chest.add(hair);
 
-    var foreMast = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 7.5, 10), midWood);
-    foreMast.position.set(5.0, 6.15, 0); g.add(foreMast);
-    var foreYard = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 4.5, 8), midWood);
-    foreYard.rotation.x = Math.PI / 2; foreYard.position.set(5.0, 8.5, 0); g.add(foreYard);
-    var foreSail = new THREE.Mesh(new THREE.PlaneGeometry(4.0, 3.2, 6, 5), sailMat);
-    foreSail.position.set(5.0, 6.7, 0); foreSail.rotation.y = Math.PI / 2; g.add(foreSail);
+    /* SHOULDERS — both arms move together since they hold one oar */
+    var leftShoulder = new THREE.Group();
+    leftShoulder.position.set(0.32, 0.78, 0);
+    chest.add(leftShoulder);
+    var rightShoulder = new THREE.Group();
+    rightShoulder.position.set(-0.32, 0.78, 0);
+    chest.add(rightShoulder);
 
-    var jibShape = new THREE.Shape();
-    jibShape.moveTo(0, 0); jibShape.lineTo(3.6, 0); jibShape.lineTo(0, 3.0); jibShape.lineTo(0, 0);
-    var jib = new THREE.Mesh(new THREE.ShapeGeometry(jibShape), canvasMat);
-    jib.position.set(5.5, 5.5, 0); jib.rotation.y = Math.PI / 2; g.add(jib);
+    /* Upper arms hang from shoulders */
+    var leftUpper = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.07, 0.42, 8), shirtMat);
+    leftUpper.position.y = -0.21; leftShoulder.add(leftUpper);
+    var rightUpper = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.07, 0.42, 8), shirtMat);
+    rightUpper.position.y = -0.21; rightShoulder.add(rightUpper);
 
-    var bowsprit = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.12, 3.5, 8), midWood);
-    bowsprit.position.set(8.5, 3.4, 0); bowsprit.rotation.z = -Math.PI / 2; bowsprit.rotation.y = -0.25; g.add(bowsprit);
+    /* Forearms — exposed skin (sleeves end at elbow) */
+    var leftElbow = new THREE.Group();
+    leftElbow.position.y = -0.42;
+    leftShoulder.add(leftElbow);
+    var leftForearm = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.06, 0.4, 8), skinMat);
+    leftForearm.position.y = -0.20; leftElbow.add(leftForearm);
+    var leftHand = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 8), skinMat);
+    leftHand.position.y = -0.40; leftElbow.add(leftHand);
 
-    function rope(from, to) { g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([from, to]), ropeMat)); }
-    rope(new THREE.Vector3(2.0, 11.7, 0),  new THREE.Vector3(6.5, 3.3, -1.85));
-    rope(new THREE.Vector3(2.0, 11.7, 0),  new THREE.Vector3(6.5, 3.3,  1.85));
-    rope(new THREE.Vector3(2.0, 11.7, 0),  new THREE.Vector3(-6.5, 3.3, -1.85));
-    rope(new THREE.Vector3(2.0, 11.7, 0),  new THREE.Vector3(-6.5, 3.3,  1.85));
-    rope(new THREE.Vector3(5.0, 9.85, 0),  new THREE.Vector3(2.5, 3.3, -1.85));
-    rope(new THREE.Vector3(5.0, 9.85, 0),  new THREE.Vector3(2.5, 3.3,  1.85));
-    rope(new THREE.Vector3(5.0, 9.85, 0),  new THREE.Vector3(10.0, 3.3, 0));
+    var rightElbow = new THREE.Group();
+    rightElbow.position.y = -0.42;
+    rightShoulder.add(rightElbow);
+    var rightForearm = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.06, 0.4, 8), skinMat);
+    rightForearm.position.y = -0.20; rightElbow.add(rightForearm);
+    var rightHand = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 8), skinMat);
+    rightHand.position.y = -0.40; rightElbow.add(rightHand);
 
-    var pennant = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 0.4), new THREE.MeshStandardMaterial({ color: 0xf4a23a, side: THREE.DoubleSide }));
-    pennant.position.set(2.5, 11.95, 0); g.add(pennant);
+    /* Legs — bent in seated pose, mostly static */
+    var leftLeg = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.12, 0.85), pantsMat);
+    leftLeg.position.set(0.18, 0.18, 0.4); rower.add(leftLeg);
+    var rightLeg = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.12, 0.85), pantsMat);
+    rightLeg.position.set(-0.18, 0.18, 0.4); rower.add(rightLeg);
 
-    var lanternBox = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.55, 0.4), brassMat);
-    lanternBox.position.set(-6.3, 4.05, 0); g.add(lanternBox);
-    var lanternGlow = new THREE.Mesh(new THREE.SphereGeometry(0.16, 12, 10), new THREE.MeshBasicMaterial({ color: 0xffba66 }));
-    lanternGlow.position.set(-6.3, 4.05, 0); g.add(lanternGlow);
-    var lanternLight = new THREE.PointLight(0xffba66, 1.4, 18, 2);
-    lanternLight.position.set(-6.3, 4.05, 0); g.add(lanternLight);
+    /* CANOE PADDLE — held by both hands. Top (right) hand grips the T-grip,
+       bottom (left) hand grips the shaft mid-way down. Shaft extends
+       downward and outward toward the water on the rower's right side.
+       The paddle's local origin sits at the TOP HAND (T-grip) so the whole
+       paddle rotates around that pivot during the stroke. */
+    var oarGroup = new THREE.Group();
+    /* Position at right shoulder height, slightly forward of chest */
+    oarGroup.position.set(-0.20, 0.45, 0.42);
+    /* Tilt: down-and-out to the right side of the boat (paddling-side) */
+    oarGroup.rotation.x = 0.35;        /* lean forward */
+    oarGroup.rotation.z = -0.55;       /* tilt to rower's right (-X) so blade extends outboard */
+    chest.add(oarGroup);
 
-    g.userData.sails = [mainSail, foreSail, topSail, jib];
-    g.userData.pennant = pennant; g.userData.wheel = wheel; g.userData.lanternLight = lanternLight;
+    /* T-grip — small horizontal bar at the very top of the paddle,
+       sits right where the right hand grips */
+    var oarGrip = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.05, 0.05), darkWood);
+    oarGrip.position.set(0, 0.05, 0);
+    oarGroup.add(oarGrip);
+
+    /* Shaft — vertical, extends DOWN from the T-grip toward the water */
+    var oarShaft = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.045, 1.55, 8), lightWood);
+    oarShaft.position.set(0, -0.78, 0);
+    oarGroup.add(oarShaft);
+
+    /* Blade — flat paddle at the bottom of the shaft, oriented to push water */
+    var oarBlade = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.5, 0.30), darkWood);
+    oarBlade.position.set(0, -1.65, 0);
+    oarGroup.add(oarBlade);
+
+    /* OAR REST — when the rower disembarks, paddle lies on the floor of the boat,
+       running lengthwise (T-grip at stern end, blade at bow end). */
+    var oarRest = new THREE.Group();
+    oarRest.position.set(0, 0.85, 0);   /* on top of the plank seats */
+    oarRest.visible = false;
+    g.add(oarRest);
+    var restShaft = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.045, 1.55, 8), lightWood);
+    restShaft.rotation.z = Math.PI / 2;     /* lying flat along boat length (X) */
+    oarRest.add(restShaft);
+    var restGrip = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, 0.18), darkWood);
+    restGrip.position.set(-0.83, 0, 0);
+    oarRest.add(restGrip);
+    var restBlade = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.05, 0.30), darkWood);
+    restBlade.position.set(0.92, 0, 0);
+    oarRest.add(restBlade);
+
+    /* Initial pose — both arms reach forward to grip the paddle.
+       Right arm holds T-grip at top; left arm reaches further forward+across
+       to grip the shaft mid-way down. */
+    rightShoulder.rotation.x = -0.55;     /* forward */
+    rightShoulder.rotation.z = -0.30;     /* tucked inward toward midline */
+    rightElbow.rotation.x = 0.50;          /* slight forearm bend */
+    leftShoulder.rotation.x = -0.95;       /* more forward (reach) */
+    leftShoulder.rotation.z = 0.45;        /* across body to reach the shaft */
+    leftElbow.rotation.x = 0.85;           /* deeper forearm bend */
+
+    g.userData.rower = rower;
+    g.userData.chest = chest;
+    g.userData.leftShoulder = leftShoulder;
+    g.userData.rightShoulder = rightShoulder;
+    g.userData.leftElbow = leftElbow;
+    g.userData.rightElbow = rightElbow;
+    g.userData.oarGroup = oarGroup;
+    g.userData.oarRest = oarRest;
+    /* Legacy fields kept as no-ops so existing code referencing them doesn't crash */
+    g.userData.sails = [];
+    g.userData.pennant = null;
+    g.userData.wheel = null;
+    g.userData.lanternLight = null;
     return g;
   }
-  var ship = buildShip();
+  var ship = buildRowboat();
   ship.position.set(0, 0, 22); ship.rotation.y = Math.PI;
   scene.add(ship);
 
@@ -641,57 +783,81 @@
 
   /* Renders a name + number label as a 2D canvas, wraps it in a Three.js sprite
      so it auto-billboards (always faces camera) and stays readable from any angle. */
-  function makeIslandLabel(num, name, colorInt) {
+  /* Heraldic medallion — circular sprite with the program's symbol glyph at center,
+     the number arc-set along the top, two ring strokes, radial-gradient interior.
+     Reads as a coin/seal hovering over the island. */
+  function makeIslandMedallion(num, glyph, colorInt) {
     var canvas = document.createElement('canvas');
-    canvas.width = 1024;
-    canvas.height = 384;
+    canvas.width = 512;
+    canvas.height = 512;
     var ctx = canvas.getContext('2d');
     var hex = '#' + colorInt.toString(16).padStart(6, '0');
+    var cx = 256, cy = 256;
 
-    /* Rounded-rect background */
-    function roundRect(x, y, w, h, r) {
-      ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.arcTo(x + w, y, x + w, y + h, r);
-      ctx.arcTo(x + w, y + h, x, y + h, r);
-      ctx.arcTo(x, y + h, x, y, r);
-      ctx.arcTo(x, y, x + w, y, r);
-      ctx.closePath();
-    }
-    /* Pill background */
-    ctx.fillStyle = 'rgba(5, 13, 29, 0.88)';
-    roundRect(20, 20, 984, 344, 60);
+    /* Radial gradient disc — bright at center, fading to dark at rim */
+    var grad = ctx.createRadialGradient(cx, cy, 30, cx, cy, 230);
+    grad.addColorStop(0, 'rgba(5, 13, 29, 0.96)');
+    grad.addColorStop(0.6, 'rgba(5, 13, 29, 0.92)');
+    grad.addColorStop(1, hex);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 230, 0, Math.PI * 2);
     ctx.fill();
-    /* Border in program color */
+
+    /* Outer thick ring in program color */
     ctx.strokeStyle = hex;
     ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 226, 0, Math.PI * 2);
     ctx.stroke();
 
-    /* Glow under the number */
-    ctx.shadowColor = hex;
-    ctx.shadowBlur = 30;
-    ctx.fillStyle = hex;
-    ctx.font = 'bold 180px Geist, system-ui, sans-serif';
+    /* Inner thin ring at 78% radius */
+    ctx.strokeStyle = hex;
+    ctx.globalAlpha = 0.6;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 180, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    /* Number arc-set along the top — each character rotated to follow the curve */
+    var numStr = num;
+    ctx.fillStyle = '#f4ecdb';
+    ctx.font = 'bold 38px "Geist Mono", ui-monospace, monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(num, 512, 140);
-    ctx.shadowBlur = 0;
-
-    /* Divider line */
-    ctx.fillStyle = hex;
-    ctx.fillRect(412, 240, 200, 4);
-
-    /* Name */
-    ctx.fillStyle = '#f4ecdb';
-    ctx.font = 'bold 56px "Geist Mono", ui-monospace, monospace';
-    var label = name.toUpperCase();
-    /* Auto-shrink long names to fit */
-    var maxW = 920;
-    while (ctx.measureText(label).width > maxW && parseInt(ctx.font, 10) > 28) {
-      var size = parseInt(ctx.font, 10) - 4;
-      ctx.font = 'bold ' + size + 'px "Geist Mono", ui-monospace, monospace';
+    var arcRadius = 200;
+    var arcSpan = Math.PI * 0.18;          /* total angular width across number */
+    var startAngle = -Math.PI / 2 - arcSpan / 2;
+    var step = numStr.length > 1 ? arcSpan / (numStr.length - 1) : 0;
+    for (var c = 0; c < numStr.length; c++) {
+      var ang = startAngle + step * c;
+      ctx.save();
+      ctx.translate(cx + Math.cos(ang) * arcRadius, cy + Math.sin(ang) * arcRadius);
+      ctx.rotate(ang + Math.PI / 2);       /* tangent to the arc */
+      ctx.fillText(numStr[c], 0, 0);
+      ctx.restore();
     }
-    ctx.fillText(label, 512, 305);
+
+    /* Two small dot ornaments left/right of the number */
+    ctx.fillStyle = hex;
+    [-Math.PI * 0.18, Math.PI * 0.18].forEach(function (a) {
+      var rA = -Math.PI / 2 + a;
+      ctx.beginPath();
+      ctx.arc(cx + Math.cos(rA) * arcRadius, cy + Math.sin(rA) * arcRadius, 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Center symbol glyph — large, glowing in program color */
+    ctx.shadowColor = hex;
+    ctx.shadowBlur = 24;
+    ctx.fillStyle = '#f4ecdb';
+    ctx.font = '600 200px "Geist", system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    /* Force monochrome variant for symbols that have both text + emoji presentations */
+    ctx.fillText(glyph + '︎', cx, cy + 18);
+    ctx.shadowBlur = 0;
 
     var texture = new THREE.CanvasTexture(canvas);
     texture.minFilter = THREE.LinearFilter;
@@ -704,11 +870,621 @@
       depthWrite: false
     });
     var sprite = new THREE.Sprite(material);
-    /* Sprite world-space size — readable from sea distance */
-    sprite.scale.set(11, 4.1, 1);
-    /* Render on top so it isn't occluded by waves at angle */
+    /* Square scale — reads as a coin/seal */
+    sprite.scale.set(6, 6, 1);
     sprite.renderOrder = 999;
     return sprite;
+  }
+
+  /* ============================================================
+     THEMED CENTERPIECES — one bespoke landmark per program.
+     Returns { meshes: [...], anim: function(t, near){...} } so the
+     animation loop can drive proximity-triggered effects.
+     ============================================================ */
+  function _mat(c, opts) {
+    opts = opts || {};
+    return new THREE.MeshStandardMaterial({
+      color: c, roughness: opts.r != null ? opts.r : 0.85, metalness: opts.m != null ? opts.m : 0.1,
+      flatShading: !!opts.flat, emissive: opts.e || 0x000000, emissiveIntensity: opts.eI || 0
+    });
+  }
+  function _add(group, geo, mat, x, y, z, rx, ry, rz) {
+    var m = new THREE.Mesh(geo, mat);
+    m.position.set(x || 0, y || 0, z || 0);
+    if (rx) m.rotation.x = rx;
+    if (ry) m.rotation.y = ry;
+    if (rz) m.rotation.z = rz;
+    group.add(m); return m;
+  }
+
+  /* ============================================================
+     PER-THEME TERRAIN — sand, grass, rocks, trees parameterized
+     so each island reads as a *place* (forest, courtyard, dog
+     park, marble plaza) not a generic green disc.
+     ============================================================ */
+  var THEME_TERRAIN = {
+    coding: { sand: 0xc8c4b0, grass: 0xa8b0a8, rock: 0x6a7078, rockCount: 4, trunk: 0x4a4640, foliage: 0x6a8e6a, treeCount: 4 },
+    civic:  { sand: 0xd4be8a, grass: 0x9ba573, rock: 0x807a6a, rockCount: 6, trunk: 0x6b4a2c, foliage: 0x5a8048, treeCount: 9 },
+    organ:  { sand: 0xece4c8, grass: 0x9bc090, rock: 0xc8c0a8, rockCount: 4, trunk: 0x6b4423, foliage: 0x5e9a5a, treeCount: 7 },
+    eko:    { sand: 0xb09868, grass: 0x3d6b30, rock: 0x4a5e3e, rockCount: 9, trunk: 0x3a2818, foliage: 0x2a5a22, treeCount: 18 },
+    paw:    { sand: 0xd6b888, grass: 0x9a9268, rock: 0xa89074, rockCount: 5, trunk: 0x6b4423, foliage: 0x6a8048, treeCount: 7 },
+    we:     { sand: 0xe6cba0, grass: 0x8aa56a, rock: 0xa8806a, rockCount: 4, trunk: 0x6b4423, foliage: 0x7da868, treeCount: 11 },
+    global: { sand: 0xc8c8b8, grass: 0x6a8e7a, rock: 0x9098a4, rockCount: 5, trunk: 0x4a3a2a, foliage: 0x4a7a6a, treeCount: 8 },
+    cross:  { sand: 0xb0a890, grass: 0x7a8470, rock: 0x4a5058, rockCount: 6, trunk: 0x3a2818, foliage: 0x4a5e48, treeCount: 4 },
+    dream:  { sand: 0xe8d09a, grass: 0x8fa563, rock: 0xc8b890, rockCount: 4, trunk: 0x6b4423, foliage: 0x6a8e3a, treeCount: 8 },
+    launch: { sand: 0xa89878, grass: 0x8a7a5a, rock: 0x4a4a4a, rockCount: 7, trunk: 0x3a2818, foliage: 0x5a6a4a, treeCount: 3 },
+    lawgic: { sand: 0xe8e0c8, grass: 0xb8b59a, rock: 0xe0d8c0, rockCount: 5, trunk: 0x4a3a2a, foliage: 0x6a8e5a, treeCount: 4 }
+  };
+
+  /* Hoisted shared materials — paper/wood/cloth used across many islands */
+  var SHARED_MATS = {
+    paper:    new THREE.MeshStandardMaterial({ color: 0xfafaf2, roughness: 0.85 }),
+    paperOff: new THREE.MeshStandardMaterial({ color: 0xefe6c8, roughness: 0.88 }),
+    woodMid:  new THREE.MeshStandardMaterial({ color: 0x6b4a2c, roughness: 0.85 }),
+    woodLight:new THREE.MeshStandardMaterial({ color: 0xc7a679, roughness: 0.85 }),
+    woodDark: new THREE.MeshStandardMaterial({ color: 0x3a2818, roughness: 0.9  }),
+    slateGry: new THREE.MeshStandardMaterial({ color: 0x1a2540, roughness: 0.55, metalness: 0.2 }),
+    metalGry: new THREE.MeshStandardMaterial({ color: 0x8a8e96, roughness: 0.45, metalness: 0.6 }),
+    gold:     new THREE.MeshStandardMaterial({ color: 0xf4d03f, roughness: 0.4,  metalness: 0.7 })
+  };
+
+  function buildCenterpiece(data, parent) {
+    var color = data.color;
+    var theme = data.theme;
+    var cp = new THREE.Group();
+    cp.position.y = 1.55;             /* sit on plateau top */
+    parent.add(cp);
+    var anim = null;
+    var props = { wheels: [], lights: [], pulses: [], sails: [], spinning: [], swayers: [] };
+
+    if (theme === 'coding') {
+      /* CODING — stretched bus body, wheels, windows, antenna; laptops scattered */
+      var navy = _mat(0x1a2540, { r: 0.55, m: 0.2 });
+      var orange = _mat(color, { r: 0.55, m: 0.2 });
+      var pale = _mat(0xdfe4ec, { r: 0.5 });
+      _add(cp, new THREE.BoxGeometry(7, 2.4, 2.4), navy, 0, 1.7, 0);
+      _add(cp, new THREE.BoxGeometry(2, 1.6, 2.4), orange, 2.2, 1.3, 0);
+      /* Side windows */
+      [-2, -1, 0, 1, 2].forEach(function (x) {
+        _add(cp, new THREE.BoxGeometry(0.8, 0.7, 0.05), pale, x, 2.2, 1.21);
+        _add(cp, new THREE.BoxGeometry(0.8, 0.7, 0.05), pale, x, 2.2, -1.21);
+      });
+      /* Wheels */
+      var wheelMat = _mat(0x141414, { r: 0.7 });
+      [[-2.5, 1.4], [2.5, 1.4], [-2.5, -1.4], [2.5, -1.4]].forEach(function (p) {
+        var w = _add(cp, new THREE.CylinderGeometry(0.55, 0.55, 0.4, 16), wheelMat, p[0], 0.55, p[1], Math.PI / 2, 0, 0);
+        props.wheels.push(w);
+      });
+      /* Antenna */
+      _add(cp, new THREE.CylinderGeometry(0.04, 0.04, 1.2, 6), wheelMat, -2.5, 3.5, 0);
+      _add(cp, new THREE.SphereGeometry(0.18, 12, 8), orange, -2.5, 4.1, 0);
+      /* Laptops scattered around */
+      var laptopMat = _mat(0x1a2540, { r: 0.5 });
+      var screenMat = _mat(0x141414, { r: 0.4, e: 0x7af0c0, eI: 0.6 });
+      [[-5, 0, 3], [5, 0, -3], [-5, 0, -3], [5, 0, 3]].forEach(function (p) {
+        var lap = new THREE.Group();
+        lap.position.set(p[0], 0.12, p[2]);
+        lap.rotation.y = Math.random() * Math.PI;
+        var base = _add(lap, new THREE.BoxGeometry(0.9, 0.05, 0.7), laptopMat, 0, 0, 0);
+        var hinge = new THREE.Group(); hinge.position.set(0, 0.025, -0.35); lap.add(hinge);
+        var screen = _add(hinge, new THREE.BoxGeometry(0.9, 0.05, 0.7), laptopMat, 0, 0.03, 0);
+        screen.rotation.x = -Math.PI * 0.55;
+        var face = _add(hinge, new THREE.PlaneGeometry(0.78, 0.6), screenMat, 0, 0.36, -0.04);
+        face.rotation.x = -Math.PI * 0.55;
+        cp.add(lap);
+        props.pulses.push(face);
+      });
+      anim = function (t, near) {
+        props.pulses.forEach(function (f, i) {
+          var glow = near ? (0.6 + Math.sin(t * 6 + i) * 0.4) : 0.3;
+          f.material.emissiveIntensity = glow;
+        });
+      };
+    }
+    else if (theme === 'civic') {
+      /* CHANGEMAKERS — hexagonal podium + lectern + 3 banner poles */
+      var stage = _mat(0xc7a679, { r: 0.85 });
+      var lectMat = _mat(0x6a4a2c, { r: 0.85 });
+      _add(cp, new THREE.CylinderGeometry(2.5, 2.8, 0.8, 6), stage, 0, 0.4, 0);
+      _add(cp, new THREE.CylinderGeometry(0.5, 0.6, 1.6, 12), lectMat, 0, 1.6, 0);
+      /* Banner poles + flags */
+      var poleMat = _mat(0x3a2410, { r: 0.85 });
+      var bannerColors = [0xc44b3a, color, 0xf4ecdb];
+      [-25, 0, 25].forEach(function (deg, i) {
+        var pole = _add(cp, new THREE.BoxGeometry(0.08, 4.5, 0.08), poleMat, 0, 2.25, 0);
+        pole.rotation.y = deg * Math.PI / 180;
+        pole.position.x = Math.cos(deg * Math.PI / 180) * -1.2;
+        pole.position.z = Math.sin(deg * Math.PI / 180) * -1.2;
+        var flagMat = _mat(bannerColors[i], { r: 0.7 });
+        flagMat.side = THREE.DoubleSide;
+        var flag = _add(cp, new THREE.PlaneGeometry(1.2, 3.0), flagMat, pole.position.x, 3.0, pole.position.z + 0.7);
+        flag.rotation.y = pole.rotation.y;
+        props.swayers.push(flag);
+      });
+      /* Floor torus */
+      _add(cp, new THREE.TorusGeometry(3.0, 0.06, 6, 24), _mat(color, { e: color, eI: 0.4 }), 0, 0.85, 0, Math.PI / 2, 0, 0);
+      anim = function (t, near) {
+        props.swayers.forEach(function (f, i) {
+          f.rotation.y += (near ? Math.sin(t * 1.2 + i) * 0.005 : 0);
+        });
+      };
+    }
+    else if (theme === 'organ') {
+      /* ORGAN DONATION — caravan with rooftop plus, heart-pulse line */
+      var cream = _mat(0xf4ecdb, { r: 0.55 });
+      var red = _mat(color, { r: 0.55, m: 0.15 });
+      _add(cp, new THREE.BoxGeometry(5.5, 2.6, 2.6), cream, 0, 1.85, 0);
+      /* Rooftop plus sign */
+      _add(cp, new THREE.BoxGeometry(2.2, 0.5, 0.5), red, 0, 3.5, 0);
+      _add(cp, new THREE.BoxGeometry(0.5, 0.5, 2.2), red, 0, 3.5, 0);
+      /* Wheels */
+      var wMat = _mat(0x141414);
+      [[-1.8, 1.4], [1.8, 1.4], [-1.8, -1.4], [1.8, -1.4]].forEach(function (p) {
+        _add(cp, new THREE.CylinderGeometry(0.5, 0.5, 0.4, 16), wMat, p[0], 0.5, p[1], Math.PI / 2);
+      });
+      /* Heart pulse line on the side — boxes get sequenced emissive */
+      var pulseMat = _mat(0x141414, { e: color, eI: 0.4 });
+      for (var pi = 0; pi < 8; pi++) {
+        var seg = _add(cp, new THREE.BoxGeometry(0.32, 0.05, 0.05), pulseMat, -2.4 + pi * 0.6, 1.6 + (pi % 2 === 0 ? 0.3 : 0), 1.32);
+        props.pulses.push(seg);
+      }
+      anim = function (t, near) {
+        if (!near) return;
+        var phase = (t * 2) % props.pulses.length;
+        props.pulses.forEach(function (s, i) {
+          var d = Math.abs(i - phase);
+          if (d > props.pulses.length / 2) d = props.pulses.length - d;
+          s.material.emissiveIntensity = Math.max(0.2, 1 - d * 0.4);
+        });
+      };
+    }
+    else if (theme === 'eko') {
+      /* EKO — giant guardian tree with stacked canopy, root ring, petition ribbon */
+      var bark = _mat(0x4a3220, { r: 0.9, flat: true });
+      var leaf1 = _mat(0x4f7d3a, { r: 0.85, flat: true });
+      var leaf2 = _mat(color, { r: 0.85, flat: true });
+      _add(cp, new THREE.CylinderGeometry(1.2, 1.8, 6, 10), bark, 0, 3, 0);
+      var c1 = _add(cp, new THREE.IcosahedronGeometry(2.6, 1), leaf1, 0, 6.5, 0); props.spinning.push({ m: c1, sp: 0.0008 });
+      var c2 = _add(cp, new THREE.IcosahedronGeometry(2.0, 1), leaf2, 0, 8, 0); props.spinning.push({ m: c2, sp: -0.0012 });
+      var c3 = _add(cp, new THREE.IcosahedronGeometry(1.4, 1), leaf1, 0, 9.2, 0); props.spinning.push({ m: c3, sp: 0.0014 });
+      _add(cp, new THREE.TorusGeometry(2.0, 0.08, 6, 32), bark, 0, 0.05, 0, Math.PI / 2);
+      _add(cp, new THREE.TorusGeometry(1.5, 0.06, 6, 24), _mat(color, { e: color, eI: 0.3 }), 0, 2.5, 0, 0, 0, 0.35);
+      /* Saplings */
+      for (var sp = 0; sp < 6; sp++) {
+        var sang = (sp / 6) * Math.PI * 2;
+        _add(cp, new THREE.CylinderGeometry(0.06, 0.1, 0.6, 6), bark, Math.cos(sang) * 4, 0.3, Math.sin(sang) * 4);
+        _add(cp, new THREE.IcosahedronGeometry(0.3, 0), leaf1, Math.cos(sang) * 4, 0.8, Math.sin(sang) * 4);
+      }
+      anim = function (t, near) {
+        if (!near) return;
+        props.spinning.forEach(function (s) { s.m.rotation.y += s.sp; });
+      };
+    }
+    else if (theme === 'paw') {
+      /* PAWTECTION — three peaked huts in triangle + bowl */
+      var wood = _mat(0xa05030, { r: 0.85 });
+      var roof = _mat(0x3d2818, { r: 0.85 });
+      [0, Math.PI * 2/3, Math.PI * 4/3].forEach(function (ang) {
+        var hx = Math.cos(ang) * 3, hz = Math.sin(ang) * 3;
+        var hut = new THREE.Group(); hut.position.set(hx, 0, hz); hut.rotation.y = ang + Math.PI;
+        var walls = _add(hut, new THREE.BoxGeometry(1.6, 1.4, 1.6), wood, 0, 0.7, 0);
+        var rf = _add(hut, new THREE.ConeGeometry(1.3, 0.9, 4), roof, 0, 1.85, 0);
+        rf.rotation.y = Math.PI / 4;
+        cp.add(hut);
+        props.swayers.push(rf);
+      });
+      _add(cp, new THREE.CylinderGeometry(0.6, 0.6, 0.15, 16), _mat(0x6a8eb4, { r: 0.4, m: 0.5 }), 0, 0.08, 0);
+      _add(cp, new THREE.TorusGeometry(0.65, 0.05, 6, 20), wood, 0, 0.16, 0, Math.PI / 2);
+      /* Flagpole with paw flag */
+      _add(cp, new THREE.CylinderGeometry(0.05, 0.05, 1.6, 6), wood, 0, 0.8, 0);
+      var flag = _add(cp, new THREE.BoxGeometry(0.8, 0.5, 0.02), _mat(color, { r: 0.7 }), 0.4, 1.4, 0);
+      anim = function (t, near) {
+        props.swayers.forEach(function (rf, i) {
+          var lift = near ? Math.abs(Math.sin(t * 4 + i)) * 0.25 : 0;
+          rf.position.y = 1.85 + lift;
+        });
+      };
+    }
+    else if (theme === 'we') {
+      /* WE — circle of figures around central loom */
+      var skin = _mat(0xc78a5e);
+      var saree = _mat(color, { r: 0.65 });
+      for (var fi = 0; fi < 6; fi++) {
+        var fang = (fi / 6) * Math.PI * 2;
+        var fx = Math.cos(fang) * 3.5, fz = Math.sin(fang) * 3.5;
+        var fig = new THREE.Group(); fig.position.set(fx, 0, fz);
+        var body = _add(fig, new THREE.CylinderGeometry(0.35, 0.45, 1.7, 8), saree, 0, 0.85, 0);
+        var head = _add(fig, new THREE.SphereGeometry(0.32, 14, 10), skin, 0, 1.9, 0);
+        cp.add(fig);
+        props.swayers.push(body);
+      }
+      /* Central loom */
+      var wood = _mat(0xc4a87a, { r: 0.85 });
+      _add(cp, new THREE.BoxGeometry(0.2, 3.0, 0.2), wood, -0.8, 1.5, 0);
+      _add(cp, new THREE.BoxGeometry(0.2, 3.0, 0.2), wood, 0.8, 1.5, 0);
+      _add(cp, new THREE.BoxGeometry(2.0, 0.2, 0.2), wood, 0, 3.0, 0);
+      for (var wi = 0; wi < 7; wi++) {
+        _add(cp, new THREE.CylinderGeometry(0.02, 0.02, 2.5, 4), wood, -0.8 + wi * 0.27, 1.65, 0);
+      }
+      _add(cp, new THREE.BoxGeometry(1.6, 0.1, 0.3), wood, 0, 1.7, 0);
+      anim = function (t, near) {
+        props.swayers.forEach(function (b, i) {
+          b.scale.y = near ? 1 + Math.sin(t * 1.2 + i * 1.04) * 0.04 : 1;
+        });
+      };
+    }
+    else if (theme === 'global') {
+      /* GLOBAL HR — globe on tripod arches + plinth */
+      var sand = _mat(0xc4b08a, { r: 0.85 });
+      var ocean = _mat(0x1a2c4a, { r: 0.4, m: 0.5 });
+      var globe = _add(cp, new THREE.SphereGeometry(2.2, 24, 16), ocean, 0, 4.5, 0);
+      var wireframe = new THREE.Mesh(new THREE.SphereGeometry(2.21, 12, 8), new THREE.MeshBasicMaterial({ color: color, wireframe: true, transparent: true, opacity: 0.4 }));
+      wireframe.position.y = 4.5; cp.add(wireframe);
+      props.spinning.push({ m: globe, sp: 0.005 });
+      props.spinning.push({ m: wireframe, sp: 0.005 });
+      /* Tripod arches */
+      [0, Math.PI * 2/3, Math.PI * 4/3].forEach(function (ang) {
+        var arch = _add(cp, new THREE.TorusGeometry(2.6, 0.18, 8, 24, Math.PI), sand, Math.cos(ang) * 0.5, 2.5, Math.sin(ang) * 0.5, 0, ang, 0);
+      });
+      /* Plinth disc */
+      _add(cp, new THREE.RingGeometry(3.0, 3.4, 32), _mat(color, { e: color, eI: 0.3 }), 0, 0.06, 0, -Math.PI / 2);
+      /* Equator band */
+      _add(cp, new THREE.TorusGeometry(2.22, 0.05, 6, 32), _mat(color, { e: color, eI: 0.5 }), 0, 4.5, 0, Math.PI / 2);
+      anim = function (t, near) {
+        if (!near) return;
+        props.spinning.forEach(function (s) { s.m.rotation.y += s.sp; });
+      };
+    }
+    else if (theme === 'cross') {
+      /* CROSS CONNECT — bridge of scales */
+      var slate = _mat(color, { r: 0.5, m: 0.4 });
+      var bronze = _mat(0xb8a070, { r: 0.45, m: 0.6 });
+      _add(cp, new THREE.BoxGeometry(6, 0.3, 1.2), slate, 0, 0.9, 0);
+      _add(cp, new THREE.BoxGeometry(0.3, 1.6, 1.2), slate, -3, 1.5, 0);
+      _add(cp, new THREE.BoxGeometry(0.3, 1.6, 1.2), slate, 3, 1.5, 0);
+      _add(cp, new THREE.CylinderGeometry(0.15, 0.15, 3.5, 12), slate, 0, 2.65, 0);
+      _add(cp, new THREE.BoxGeometry(2.4, 0.08, 0.08), slate, 0, 4.3, 0);
+      /* Two scale-pans */
+      var panL = new THREE.Group(); panL.position.set(-1.0, 4.3, 0); cp.add(panL);
+      _add(panL, new THREE.CylinderGeometry(0.02, 0.02, 0.8, 6), slate, 0, -0.4, 0);
+      var pL = _add(panL, new THREE.CylinderGeometry(0.7, 0.5, 0.18, 16), bronze, 0, -0.85, 0);
+      var panR = new THREE.Group(); panR.position.set(1.0, 4.3, 0); cp.add(panR);
+      _add(panR, new THREE.CylinderGeometry(0.02, 0.02, 0.8, 6), slate, 0, -0.4, 0);
+      var pR = _add(panR, new THREE.CylinderGeometry(0.7, 0.5, 0.18, 16), bronze, 0, -0.85, 0);
+      props.swayers.push({ a: panL, b: panR });
+      anim = function (t, near) {
+        if (!near) return;
+        var s = props.swayers[0];
+        var swing = Math.sin(t * 1.2) * 0.18;
+        s.a.position.y = 4.3 + swing;
+        s.b.position.y = 4.3 - swing;
+      };
+    }
+    else if (theme === 'dream') {
+      /* DREAMCATCHERS — schoolhouse + dreamcatcher hoop */
+      var wall = _mat(0xf4ecdb, { r: 0.9 });
+      var roof = _mat(0xa05a3a, { r: 0.85 });
+      _add(cp, new THREE.BoxGeometry(3.6, 2.4, 3.0), wall, 0, 1.2, 0);
+      _add(cp, new THREE.BoxGeometry(3.8, 0.2, 3.2), roof, 0, 2.5, 0);
+      var pyramid = _add(cp, new THREE.ConeGeometry(2.6, 1.6, 4), roof, 0, 3.4, 0);
+      pyramid.rotation.y = Math.PI / 4;
+      /* Hoop atop the roof */
+      var hoop = new THREE.Group(); hoop.position.set(0, 4.6, 0); cp.add(hoop);
+      _add(hoop, new THREE.TorusGeometry(1.4, 0.08, 8, 28), _mat(0x6b4423, { r: 0.85 }), 0, 0, 0);
+      /* Web strands across hoop */
+      for (var hsi = 0; hsi < 6; hsi++) {
+        var hsang = (hsi / 6) * Math.PI;
+        _add(hoop, new THREE.CylinderGeometry(0.02, 0.02, 2.6, 4), _mat(0xeae0c8), 0, 0, 0, 0, 0, hsang);
+      }
+      /* Bead knots */
+      for (var bd = 0; bd < 3; bd++) {
+        var bdang = bd * Math.PI * 2 / 3;
+        _add(hoop, new THREE.SphereGeometry(0.08, 8, 6), _mat(color, { e: color, eI: 0.6 }), Math.cos(bdang) * 0.6, 0, Math.sin(bdang) * 0.6);
+      }
+      props.spinning.push({ m: hoop, sp: 0.008 });
+      anim = function (t, near) {
+        props.spinning.forEach(function (s) { s.m.rotation.y += near ? s.sp : s.sp * 0.2; });
+      };
+    }
+    else if (theme === 'launch') {
+      /* LAUNCHPAD — rocket on gantry pad */
+      var white = _mat(0xdfe4ec, { r: 0.5, m: 0.4 });
+      var charcoal = _mat(0x3a3a44, { r: 0.7 });
+      var flame = _mat(color, { e: color, eI: 0.6 });
+      /* Pad disc */
+      _add(cp, new THREE.CylinderGeometry(1.2, 1.4, 0.4, 16), charcoal, 0, 0.2, 0);
+      /* Rocket body */
+      _add(cp, new THREE.CylinderGeometry(0.6, 0.9, 4.5, 16), white, 0, 2.65, 0);
+      /* Nosecone */
+      _add(cp, new THREE.ConeGeometry(0.6, 1.4, 16), white, 0, 5.6, 0);
+      /* Fins */
+      [0, Math.PI / 2, Math.PI, Math.PI * 1.5].forEach(function (a) {
+        var fin = _add(cp, new THREE.BoxGeometry(0.15, 1.0, 0.8), color === 0xff8855 ? flame : white, Math.cos(a) * 0.7, 0.9, Math.sin(a) * 0.7);
+        fin.rotation.y = a;
+        fin.material = white;
+      });
+      /* Gantry */
+      _add(cp, new THREE.BoxGeometry(0.2, 5, 0.2), charcoal, 1.8, 2.9, 0);
+      _add(cp, new THREE.BoxGeometry(0.2, 0.2, 1.4), charcoal, 1.4, 4.4, 0);
+      /* Exhaust scorch ring */
+      var scorch = _add(cp, new THREE.TorusGeometry(1.5, 0.08, 8, 24), flame, 0, 0.05, 0, Math.PI / 2);
+      props.pulses.push(scorch);
+      anim = function (t, near) {
+        scorch.material.emissiveIntensity = near ? 0.6 + Math.sin(t * 6) * 0.4 : 0.3;
+      };
+    }
+    else if (theme === 'lawgic') {
+      /* L.A.W.G.I.C. — classical column courthouse */
+      var marble = _mat(0xede5d4, { r: 0.7 });
+      var shadow = _mat(0x7a6a5a, { r: 0.85 });
+      _add(cp, new THREE.BoxGeometry(5.5, 0.4, 4.0), marble, 0, 0.2, 0);
+      [-2.2, -0.8, 0.8, 2.2].forEach(function (cx) {
+        _add(cp, new THREE.CylinderGeometry(0.4, 0.45, 4.0, 12), marble, cx, 2.4, 0);
+      });
+      _add(cp, new THREE.BoxGeometry(5.2, 0.5, 3.7), marble, 0, 4.65, 0);
+      var pediment = _add(cp, new THREE.ConeGeometry(2.6, 1.0, 4), shadow, 0, 5.4, 0);
+      pediment.rotation.y = Math.PI / 4;
+      /* Laurel wreath */
+      _add(cp, new THREE.TorusGeometry(0.8, 0.04, 6, 24), _mat(color, { e: color, eI: 0.4 }), 0, 5.0, 1.85, 0, 0, 0);
+      /* Two columns to track */
+      props.lights = [];
+      [-2.2, -0.8, 0.8, 2.2].forEach(function (cx) {
+        var lit = _mat(color, { e: color, eI: 0.0 });
+        var indicator = _add(cp, new THREE.CylinderGeometry(0.45, 0.5, 0.1, 12), lit, cx, 4.4, 0);
+        props.lights.push(indicator);
+      });
+      anim = function (t, near) {
+        if (!near) {
+          props.lights.forEach(function (l) { l.material.emissiveIntensity = 0; });
+          return;
+        }
+        props.lights.forEach(function (l, i) {
+          var phase = (t - i * 0.4) % 4;
+          l.material.emissiveIntensity = phase >= 0 && phase < 2 ? Math.max(0, 1 - phase * 0.5) : 0;
+        });
+      };
+    }
+
+    return { group: cp, anim: anim };
+  }
+
+  /* ============================================================
+     SECONDARY PROPS — 2-4 small environmental objects per island
+     scattered between centerpiece and lore pillars to make each
+     island feel like a real *place*, not a single landmark on grass.
+     Placement convention: radius 5-8 from island origin, angles
+     30°/150°/270° + variants (between pillars at 90°/210°/330°).
+     ============================================================ */
+  function buildIslandProps(data, parent) {
+    var theme = data.theme;
+    var color = data.color;
+    var props = new THREE.Group();
+    props.position.y = 1.55;
+    parent.add(props);
+
+    function place(rad, angDeg, yOffset) {
+      var a = angDeg * Math.PI / 180;
+      var g = new THREE.Group();
+      g.position.set(Math.cos(a) * rad, yOffset || 0, Math.sin(a) * rad);
+      g.rotation.y = -a + Math.PI;     /* face toward centerpiece */
+      props.add(g);
+      return g;
+    }
+
+    if (theme === 'coding') {
+      /* 2 whiteboard easels */
+      [30, 150].forEach(function (deg) {
+        var e = place(6, deg, 0);
+        var legL = _add(e, new THREE.CylinderGeometry(0.04, 0.04, 1.6, 6), SHARED_MATS.woodMid, -0.45, 0.8, 0.2, 0, 0, 0.18);
+        var legR = _add(e, new THREE.CylinderGeometry(0.04, 0.04, 1.6, 6), SHARED_MATS.woodMid,  0.45, 0.8, 0.2, 0, 0, -0.18);
+        var legB = _add(e, new THREE.CylinderGeometry(0.04, 0.04, 1.6, 6), SHARED_MATS.woodMid, 0, 0.8, -0.4, 0.18, 0, 0);
+        _add(e, new THREE.BoxGeometry(1.2, 0.9, 0.05), SHARED_MATS.paper, 0, 1.6, 0.05);
+        _add(e, new THREE.BoxGeometry(1.2, 0.05, 0.06), SHARED_MATS.slateGry, 0, 1.1, 0.07);
+      });
+      /* 1 stacked-books cluster */
+      var bs = place(5.5, 270, 0);
+      var bookCol = [color, 0x1a2540, 0xe85d6b, 0x6ed089];
+      for (var bi = 0; bi < 4; bi++) {
+        _add(bs, new THREE.BoxGeometry(0.7, 0.18, 0.5), _mat(bookCol[bi], { r: 0.7 }), 0, 0.09 + bi * 0.18, 0, 0, (bi - 2) * 0.15, 0);
+      }
+    }
+    else if (theme === 'civic') {
+      /* 5 placard posts — scattered at random radii 5.5-8, skip pillar angles 90/210/330 */
+      var placardAngles = [40, 130, 175, 285, 320];
+      placardAngles.forEach(function (deg, i) {
+        var r = 5.5 + (i % 3) * 0.8;
+        var p = place(r, deg, 0);
+        _add(p, new THREE.CylinderGeometry(0.06, 0.06, 1.4, 6), SHARED_MATS.woodMid, 0, 0.7, 0);
+        _add(p, new THREE.BoxGeometry(0.55, 0.4, 0.04), SHARED_MATS.paper, 0, 1.4, 0.05, 0, 0, 0.18);
+        _add(p, new THREE.BoxGeometry(0.55, 0.06, 0.045), _mat(color), 0, 1.5, 0.052, 0, 0, 0.18);
+      });
+      /* 2 wooden benches */
+      [30, 150].forEach(function (deg) {
+        var b = place(7, deg, 0);
+        _add(b, new THREE.BoxGeometry(1.6, 0.1, 0.5), SHARED_MATS.woodLight, 0, 0.45, 0);
+        _add(b, new THREE.BoxGeometry(0.1, 0.5, 0.5), SHARED_MATS.woodLight, -0.7, 0.25, 0);
+        _add(b, new THREE.BoxGeometry(0.1, 0.5, 0.5), SHARED_MATS.woodLight,  0.7, 0.25, 0);
+        _add(b, new THREE.BoxGeometry(1.6, 0.4, 0.08), SHARED_MATS.woodLight, 0, 0.7, -0.21);
+      });
+    }
+    else if (theme === 'organ') {
+      /* 3 floating donor cards */
+      [30, 150, 270].forEach(function (deg, i) {
+        var c = place(5.5, deg, 0);
+        var card = _add(c, new THREE.BoxGeometry(0.7, 0.05, 1.0), SHARED_MATS.paper, 0, 1.3, 0);
+        _add(c, new THREE.BoxGeometry(0.7, 0.055, 0.08), _mat(color), 0, 1.31, -0.4);
+        card.userData.bobBase = 1.3; card.userData.bobPhase = i;
+        props.userData.cards = props.userData.cards || [];
+        props.userData.cards.push(card);
+      });
+      /* 2 hearts on pedestals */
+      [60, 240].forEach(function (deg) {
+        var h = place(7, deg, 0);
+        _add(h, new THREE.CylinderGeometry(0.35, 0.4, 0.6, 12), _mat(0xdfe4ec, { r: 0.7 }), 0, 0.3, 0);
+        var heart = new THREE.Group(); heart.position.y = 1.05; h.add(heart);
+        _add(heart, new THREE.SphereGeometry(0.28, 12, 8), _mat(color, { e: color, eI: 0.3 }), -0.2, 0.05, 0);
+        _add(heart, new THREE.SphereGeometry(0.28, 12, 8), _mat(color, { e: color, eI: 0.3 }),  0.2, 0.05, 0);
+        _add(heart, new THREE.ConeGeometry(0.4, 0.5, 4), _mat(color, { e: color, eI: 0.3 }), 0, -0.3, 0, Math.PI, 0, 0);
+      });
+    }
+    else if (theme === 'eko') {
+      /* 3 stacked petition-paper cubes */
+      [30, 150, 270].forEach(function (deg) {
+        var s = place(6, deg, 0);
+        for (var pi = 0; pi < 5; pi++) {
+          var pmat = pi % 2 === 0 ? SHARED_MATS.paper : SHARED_MATS.paperOff;
+          _add(s, new THREE.BoxGeometry(0.8, 0.1, 0.6), pmat, 0, 0.1 + pi * 0.1, 0, 0, (pi - 2) * 0.1, 0);
+        }
+        _add(s, new THREE.SphereGeometry(0.12, 8, 6), _mat(color, { e: color, eI: 0.4 }), 0, 0.7, 0);
+      });
+    }
+    else if (theme === 'paw') {
+      /* 3 paw-print floor markers (flat circles) */
+      [40, 160, 280].forEach(function (deg) {
+        var pp = place(5.5, deg, 0);
+        var pad = _add(pp, new THREE.CircleGeometry(0.35, 16), _mat(color, { r: 0.85 }), 0, 0.02, 0, -Math.PI / 2);
+        for (var ti = 0; ti < 4; ti++) {
+          var ta = (ti / 4) * Math.PI * 2;
+          _add(pp, new THREE.CircleGeometry(0.13, 12), _mat(color, { r: 0.85 }), Math.cos(ta) * 0.45, 0.025, Math.sin(ta) * 0.45, -Math.PI / 2);
+        }
+      });
+      /* 2 food bowls */
+      [120, 300].forEach(function (deg) {
+        var b = place(6, deg, 0);
+        _add(b, new THREE.CylinderGeometry(0.35, 0.25, 0.18, 16), SHARED_MATS.metalGry, 0, 0.09, 0);
+        _add(b, new THREE.CylinderGeometry(0.28, 0.28, 0.06, 16), _mat(0x6a4a2c), 0, 0.21, 0);
+      });
+      /* 1 ball toy */
+      var bt = place(5, 0, 0);
+      _add(bt, new THREE.SphereGeometry(0.25, 16, 12), _mat(0xe85d6b, { r: 0.55 }), 0, 0.25, 0);
+    }
+    else if (theme === 'we') {
+      /* 3 earnings jars */
+      [30, 150, 270].forEach(function (deg) {
+        var j = place(5.5, deg, 0);
+        var jarMat = new THREE.MeshStandardMaterial({ color: 0xdfe4ec, roughness: 0.4, metalness: 0.2, transparent: true, opacity: 0.6 });
+        _add(j, new THREE.CylinderGeometry(0.22, 0.18, 0.5, 12), jarMat, 0, 0.25, 0);
+        _add(j, new THREE.CylinderGeometry(0.18, 0.18, 0.3, 12), SHARED_MATS.gold, 0, 0.18, 0);
+      });
+      /* Stacked folded-cloth (3 colors) */
+      var fc = place(6, 60, 0);
+      var clothCols = [color, 0x6ab8c9, 0xf4d03f];
+      for (var ci = 0; ci < 3; ci++) {
+        _add(fc, new THREE.BoxGeometry(0.7, 0.12, 0.5), _mat(clothCols[ci], { r: 0.7 }), 0, 0.06 + ci * 0.12, 0);
+      }
+      /* 4 flower buds clustered */
+      var fb = place(6.5, 240, 0);
+      var budCols = [color, 0xf4d03f, color, 0xf4d03f];
+      for (var fi = 0; fi < 4; fi++) {
+        var fa = (fi / 4) * Math.PI * 2;
+        var fx = Math.cos(fa) * 0.25, fz = Math.sin(fa) * 0.25;
+        _add(fb, new THREE.CylinderGeometry(0.04, 0.04, 0.4, 6), _mat(0x6ed089), fx, 0.2, fz);
+        _add(fb, new THREE.IcosahedronGeometry(0.14, 0), _mat(budCols[fi], { e: budCols[fi], eI: 0.3 }), fx, 0.45, fz);
+      }
+    }
+    else if (theme === 'global') {
+      /* 3 passport stelae */
+      [30, 150, 270].forEach(function (deg) {
+        var s = place(6, deg, 0);
+        _add(s, new THREE.BoxGeometry(0.5, 1.4, 0.15), _mat(color, { r: 0.65 }), 0, 0.7, 0);
+        _add(s, new THREE.BoxGeometry(0.5, 0.08, 0.16), SHARED_MATS.gold, 0, 1.2, 0);
+      });
+      /* 2 compass stones */
+      [60, 240].forEach(function (deg) {
+        var c = place(7, deg, 0);
+        _add(c, new THREE.CylinderGeometry(0.5, 0.55, 0.25, 16), SHARED_MATS.metalGry, 0, 0.13, 0);
+        _add(c, new THREE.BoxGeometry(0.6, 0.04, 0.06), _mat(0xe85d6b, { e: 0xe85d6b, eI: 0.3 }), 0, 0.27, 0);
+        _add(c, new THREE.BoxGeometry(0.06, 0.04, 0.6), _mat(0xe85d6b), 0, 0.27, 0);
+      });
+    }
+    else if (theme === 'cross') {
+      /* 2 stacked-document blocks */
+      [30, 150].forEach(function (deg) {
+        var d = place(5.5, deg, 0);
+        for (var di = 0; di < 4; di++) {
+          var rotJ = di === 3 ? 0.2 : 0;
+          _add(d, new THREE.BoxGeometry(0.6, 0.08, 0.45), SHARED_MATS.paper, 0, 0.04 + di * 0.08, 0, 0, rotJ, 0);
+        }
+        _add(d, new THREE.BoxGeometry(0.06, 0.34, 0.45), _mat(0xe85d6b), 0.32, 0.2, 0);
+      });
+      /* 2 open-briefcases */
+      [115, 285].forEach(function (deg) {
+        var b = place(6.5, deg, 0);
+        _add(b, new THREE.BoxGeometry(0.9, 0.12, 0.6), SHARED_MATS.woodMid, 0, 0.06, 0);
+        var lid = _add(b, new THREE.BoxGeometry(0.9, 0.6, 0.08), SHARED_MATS.woodMid, 0, 0.32, -0.26, -0.4, 0, 0);
+        _add(b, new THREE.BoxGeometry(0.3, 0.05, 0.15), SHARED_MATS.gold, 0, 0.16, 0.32);
+      });
+      /* 1 quill in inkwell */
+      var q = place(5, 0, 0);
+      _add(q, new THREE.CylinderGeometry(0.18, 0.22, 0.2, 12), _mat(0x1a2540, { r: 0.55, m: 0.3 }), 0, 0.1, 0);
+      _add(q, new THREE.CylinderGeometry(0.02, 0.04, 0.9, 6), SHARED_MATS.paper, 0.12, 0.6, 0, 0, 0, -0.5);
+      _add(q, new THREE.ConeGeometry(0.06, 0.3, 5), SHARED_MATS.paper, 0.32, 1.0, 0, 0, 0, -0.5);
+    }
+    else if (theme === 'dream') {
+      /* 3 chalkboards */
+      [30, 150, 270].forEach(function (deg) {
+        var ch = place(6, deg, 0);
+        _add(ch, new THREE.BoxGeometry(0.08, 1.0, 1.2), SHARED_MATS.woodMid, 0, 0.55, 0);
+        _add(ch, new THREE.BoxGeometry(0.04, 0.85, 1.05), _mat(0x1a2540, { r: 0.6 }), 0.04, 0.55, 0);
+        _add(ch, new THREE.CylinderGeometry(0.04, 0.04, 0.8, 6), SHARED_MATS.woodMid, 0, 0.4, -0.5, 0, 0, 0.3);
+        _add(ch, new THREE.CylinderGeometry(0.04, 0.04, 0.8, 6), SHARED_MATS.woodMid, 0, 0.4, 0.5, 0, 0, -0.3);
+      });
+      /* 2 textbook stacks */
+      [60, 240].forEach(function (deg) {
+        var ts = place(5.5, deg, 0);
+        var bookCols = [0xe85d6b, 0x5b89c4, 0x6ed089];
+        for (var bi = 0; bi < 3; bi++) {
+          _add(ts, new THREE.BoxGeometry(0.6, 0.15, 0.45), _mat(bookCols[bi], { r: 0.7 }), 0, 0.08 + bi * 0.15, 0, 0, (bi - 1) * 0.12, 0);
+        }
+      });
+      /* 1 backpack */
+      var bp = place(5, 0, 0);
+      _add(bp, new THREE.BoxGeometry(0.6, 0.8, 0.4), _mat(color, { r: 0.7 }), 0, 0.4, 0);
+      _add(bp, new THREE.BoxGeometry(0.5, 0.3, 0.12), _mat(0x1a2540, { r: 0.7 }), 0, 0.3, 0.21);
+      _add(bp, new THREE.TorusGeometry(0.08, 0.025, 8, 12), _mat(color, { r: 0.7 }), -0.2, 0.85, 0, Math.PI / 2);
+      _add(bp, new THREE.TorusGeometry(0.08, 0.025, 8, 12), _mat(color, { r: 0.7 }),  0.2, 0.85, 0, Math.PI / 2);
+    }
+    else if (theme === 'launch') {
+      /* 3 toolbox crates */
+      [30, 150, 270].forEach(function (deg) {
+        var t = place(6, deg, 0);
+        _add(t, new THREE.BoxGeometry(0.9, 0.5, 0.55), _mat(color, { r: 0.6, m: 0.2 }), 0, 0.25, 0);
+        _add(t, new THREE.BoxGeometry(0.9, 0.08, 0.55), SHARED_MATS.slateGry, 0, 0.51, 0);
+        _add(t, new THREE.TorusGeometry(0.08, 0.02, 8, 10), SHARED_MATS.slateGry, 0, 0.6, 0, Math.PI / 2);
+      });
+      /* 2 hard-hats */
+      [60, 240].forEach(function (deg) {
+        var h = place(5.5, deg, 0);
+        var hat = _add(h, new THREE.SphereGeometry(0.32, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2), SHARED_MATS.gold, 0, 0.2, 0);
+        _add(h, new THREE.CylinderGeometry(0.34, 0.34, 0.06, 16), SHARED_MATS.gold, 0, 0.2, 0);
+      });
+      /* 1 flag-pin marker */
+      var fp = place(5, 0, 0);
+      _add(fp, new THREE.CylinderGeometry(0.04, 0.04, 1.2, 6), SHARED_MATS.metalGry, 0, 0.6, 0);
+      _add(fp, new THREE.BoxGeometry(0.5, 0.3, 0.04), _mat(color), 0.25, 1.05, 0);
+    }
+    else if (theme === 'lawgic') {
+      /* 2 open-book pedestals */
+      [30, 150].forEach(function (deg) {
+        var op = place(6, deg, 0);
+        _add(op, new THREE.CylinderGeometry(0.4, 0.45, 0.7, 8), SHARED_MATS.woodLight, 0, 0.35, 0);
+        _add(op, new THREE.BoxGeometry(0.6, 0.04, 0.5), SHARED_MATS.paper, -0.18, 0.85, 0, 0, 0, 0.25);
+        _add(op, new THREE.BoxGeometry(0.6, 0.04, 0.5), SHARED_MATS.paper,  0.18, 0.85, 0, 0, 0, -0.25);
+      });
+      /* 2 judgment pebbles */
+      [110, 290].forEach(function (deg) {
+        var pe = place(5.5, deg, 0);
+        var stone = _add(pe, new THREE.IcosahedronGeometry(0.3, 0), _mat(color, { e: color, eI: 0.2, flat: true }), 0, 0.15, 0);
+        stone.scale.y = 0.5;
+      });
+      /* 1 unrolled scroll */
+      var us = place(5, 270, 0);
+      _add(us, new THREE.BoxGeometry(1.2, 0.04, 0.6), SHARED_MATS.paperOff, 0, 0.05, 0);
+      _add(us, new THREE.CylinderGeometry(0.08, 0.08, 0.65, 12), SHARED_MATS.woodMid, -0.6, 0.05, 0, 0, 0, Math.PI / 2);
+      _add(us, new THREE.CylinderGeometry(0.08, 0.08, 0.65, 12), SHARED_MATS.woodMid,  0.6, 0.05, 0, 0, 0, Math.PI / 2);
+    }
+
+    return props;
   }
 
   var shoreObjs = [];
@@ -722,29 +1498,33 @@
       var group = new THREE.Group();
       group.position.set(x, 0, z);
 
-      /* Sandy beach ring */
+      /* THEMED TERRAIN — colors + densities looked up from THEME_TERRAIN per-program */
+      var tt = THEME_TERRAIN[data.theme] || THEME_TERRAIN.civic;
+
+      /* Sandy beach ring — color tuned per theme (lawgic = pale marble; eko = darker forest sand; etc.) */
       var sand = new THREE.Mesh(
         new THREE.CylinderGeometry(ISLAND_RADIUS + 2, ISLAND_RADIUS + 4, 0.6, 32),
-        new THREE.MeshStandardMaterial({ color: 0xe6cf95, roughness: 0.95 })
+        new THREE.MeshStandardMaterial({ color: tt.sand, roughness: 0.95 })
       );
       sand.position.y = 0.1; group.add(sand);
 
-      /* Grass plateau (walkable) */
+      /* Grass / ground plateau — themed: forest-deep on EKO, slate on Coding, marble on LAWGIC */
       var plateau = new THREE.Mesh(
         new THREE.CylinderGeometry(PLATEAU_RADIUS, ISLAND_RADIUS, 1.2, 32),
-        new THREE.MeshStandardMaterial({ color: 0x6f9a52, roughness: 0.92 })
+        new THREE.MeshStandardMaterial({ color: tt.grass, roughness: 0.92 })
       );
       plateau.position.y = 0.95; group.add(plateau);
 
-      /* Rocky outcrops scattered on plateau */
-      for (var rk = 0; rk < 5; rk++) {
-        var rang = (rk / 5) * Math.PI * 2 + Math.random();
+      /* Rocks — count + color per theme */
+      var rockMat = new THREE.MeshStandardMaterial({ color: tt.rock, flatShading: true, roughness: 0.92 });
+      for (var rk = 0; rk < tt.rockCount; rk++) {
+        var rang = (rk / tt.rockCount) * Math.PI * 2 + Math.random();
         var rrad = 8 + Math.random() * 10;
         var rx = Math.cos(rang) * rrad;
         var rz = Math.sin(rang) * rrad;
         var rock = new THREE.Mesh(
           new THREE.IcosahedronGeometry(1.2 + Math.random() * 1.4, 0),
-          new THREE.MeshStandardMaterial({ color: 0x6f7e58, flatShading: true })
+          rockMat
         );
         rock.position.set(rx, 1.6 + Math.random() * 0.6, rz);
         rock.scale.set(1, 0.6, 1);
@@ -752,15 +1532,17 @@
         group.add(rock);
       }
 
-      /* Trees scattered around the perimeter */
-      for (var tr = 0; tr < 10; tr++) {
-        var tang = (tr / 10) * Math.PI * 2 + Math.random() * 0.3;
+      /* Trees — count + trunk + foliage colors per theme */
+      var trunkMat = new THREE.MeshStandardMaterial({ color: tt.trunk, roughness: 0.9 });
+      var foliageMat = new THREE.MeshStandardMaterial({ color: tt.foliage, flatShading: true, roughness: 0.85 });
+      for (var tr = 0; tr < tt.treeCount; tr++) {
+        var tang = (tr / tt.treeCount) * Math.PI * 2 + Math.random() * 0.3;
         var trad = 14 + Math.random() * 7;
         var tx = Math.cos(tang) * trad;
         var tz = Math.sin(tang) * trad;
-        var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.24, 1.8, 6), new THREE.MeshStandardMaterial({ color: 0x6b4423 }));
+        var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.24, 1.8, 6), trunkMat);
         trunk.position.set(tx, 2.45, tz); group.add(trunk);
-        var foliage = new THREE.Mesh(new THREE.IcosahedronGeometry(1.4 + Math.random() * 0.4, 0), new THREE.MeshStandardMaterial({ color: 0x4f7d3a, flatShading: true }));
+        var foliage = new THREE.Mesh(new THREE.IcosahedronGeometry(1.4 + Math.random() * 0.4, 0), foliageMat);
         foliage.position.set(tx, 4.2, tz); foliage.scale.y = 1.3;
         group.add(foliage);
       }
@@ -785,10 +1567,16 @@
       var markerLight = new THREE.PointLight(data.color, 0.8, 22, 2);
       markerLight.position.y = 12; group.add(markerLight);
 
-      /* Name + number label — sprite floating above the marker */
-      var label = makeIslandLabel(data.num, data.title, data.color);
-      label.position.y = 18;
-      group.add(label);
+      /* Heraldic medallion — circular sprite with the program's symbol glyph */
+      var medallion = makeIslandMedallion(data.num, data.glyph || data.num, data.color);
+      medallion.position.y = 18;
+      group.add(medallion);
+
+      /* Themed centerpiece — adds program-specific landmark + props inside the pillar ring */
+      var cp = buildCenterpiece(data, group);
+
+      /* Secondary props — small environmental objects scattered around the centerpiece */
+      buildIslandProps(data, group);
 
       /* THREE LORE PILLARS — equilateral triangle around plateau center */
       var pillars = [];
@@ -851,7 +1639,9 @@
       scene.add(group);
       shoreObjs.push({
         data: data, group: group, marker: marker, halo: halo, beam: beam, light: markerLight,
-        x: x, z: z, visited: false, index: i, pillars: pillars
+        medallion: medallion,
+        x: x, z: z, visited: false, index: i, pillars: pillars,
+        centerpiece: cp           /* { group, anim(t, near) } from buildCenterpiece */
       });
     });
   }
@@ -1010,8 +1800,14 @@
     avatar.position.copy(avatarPos);
     avatar.rotation.y = avatarHeading;
     avatar.visible = true;
-    /* Hide ship visually, freeze it at landing position */
-    ship.visible = true;  /* keep visible — we'll see it offshore */
+    /* Boat stays visible offshore. Rower "leaves the paddle":
+       - hide the rower (he's walking ashore as the avatar now)
+       - hide the held oar
+       - show the resting oar laid across the gunwale */
+    ship.visible = true;
+    if (ship.userData.rower) ship.userData.rower.visible = false;
+    if (ship.userData.oarGroup) ship.userData.oarGroup.visible = false;
+    if (ship.userData.oarRest) ship.userData.oarRest.visible = true;
     /* Hide disembark prompt */
     disembarkEl.hidden = true;
     /* Update help/chapter */
@@ -1028,9 +1824,18 @@
       currentIsland.halo.material.opacity = 0.3;
       currentIsland.beam.material.opacity = 0.06;
       currentIsland.light.intensity = 0.15;
+      /* Dim the medallion to signal "explored" */
+      if (currentIsland.medallion && currentIsland.medallion.material) {
+        currentIsland.medallion.material.opacity = 0.5;
+      }
     }
     MODE = 'sailing';
     avatar.visible = false;
+    /* Rower picks up the paddle and gets back to rowing — show rower + held oar,
+       hide the resting oar that was laid across the gunwale */
+    if (ship.userData.rower) ship.userData.rower.visible = true;
+    if (ship.userData.oarGroup) ship.userData.oarGroup.visible = true;
+    if (ship.userData.oarRest) ship.userData.oarRest.visible = false;
     /* Reposition ship just off the south edge of the island, facing away */
     var dx = ship.position.x - currentIsland.x;
     var dz = ship.position.z - currentIsland.z;
@@ -1090,8 +1895,10 @@
   if (decisionClose) decisionClose.addEventListener('click', function () { hideDecision(); });
   if (loreClose) loreClose.addEventListener('click', function () { closeLorePanel(); });
 
+  /* W/A/S/D directional buttons — held down for movement */
   touchBtns.forEach(function (b) {
     var k = b.getAttribute('data-key');
+    if (!k) return;   /* skip action buttons (G, R/E) — handled below */
     var press = function (ev) { ev.preventDefault(); setKey(k, true); if (introEl && !introEl.classList.contains('is-gone')) hideIntro(); };
     var release = function (ev) { ev.preventDefault(); setKey(k, false); };
     b.addEventListener('touchstart', press, { passive: false });
@@ -1101,6 +1908,24 @@
     b.addEventListener('mouseup', release);
     b.addEventListener('mouseleave', release);
   });
+
+  /* Action buttons G (board/disembark) and R/E (continue/dismiss panel) — single-tap */
+  var gBtn  = document.getElementById('sm3-touch-g');
+  var reBtn = document.getElementById('sm3-touch-re');
+  if (gBtn) {
+    var gTap = function (ev) {
+      ev.preventDefault();
+      if (introEl && !introEl.classList.contains('is-gone')) { hideIntro(); return; }
+      tryToggleMode();
+    };
+    gBtn.addEventListener('touchstart', gTap, { passive: false });
+    gBtn.addEventListener('click', gTap);
+  }
+  if (reBtn) {
+    var reTap = function (ev) { ev.preventDefault(); tryInteract(); };
+    reBtn.addEventListener('touchstart', reTap, { passive: false });
+    reBtn.addEventListener('click', reTap);
+  }
 
   var lookOffset = 0;
   var isDragging = false, dragStartX = 0;
@@ -1149,7 +1974,12 @@
   /* ---------- SHIP MOVEMENT ---------- */
   var velocity = 0;
   var heading = Math.PI;
-  var maxSpeed = 0.5, accel = 0.013, friction = 0.965, turnSpeed = 0.018;
+  var headingVel = 0;   /* angular velocity for smooth, ship-like turns */
+  /* Ship physics — heavy & slow, not a speedboat:
+     - low accel + high friction = long ramp-up and long drift after release
+     - turn rate is integrated through angular velocity so it eases in/out
+     - max speed is moderate; the boat *should* feel like it has tonnage */
+  var maxSpeed = 0.34, accel = 0.0045, friction = 0.988, turnSpeed = 0.0009, turnFriction = 0.93, maxTurn = 0.022;
   function isPressed(name) {
     if (name === 'forward') return keys['w'] || keys['arrowup'];
     if (name === 'back') return keys['s'] || keys['arrowdown'];
@@ -1294,17 +2124,55 @@
 
   /* ---- Sailing update ---- */
   function updateSailing(t, dt) {
+    /* Forward / back — gentle ramp to maxSpeed (~3 sec to reach top) */
     if (isPressed('forward')) velocity = Math.min(velocity + accel, maxSpeed);
-    else if (isPressed('back')) velocity = Math.max(velocity - accel * 1.3, -maxSpeed * 0.45);
-    else velocity *= friction;
-    if (Math.abs(velocity) < 0.001) velocity = 0;
-    if (isPressed('left'))  heading += turnSpeed * (1 + Math.abs(velocity));
-    if (isPressed('right')) heading -= turnSpeed * (1 + Math.abs(velocity));
+    else if (isPressed('back')) velocity = Math.max(velocity - accel * 1.1, -maxSpeed * 0.4);
+    else velocity *= friction;   /* high friction (.988) → ship glides for many seconds */
+    if (Math.abs(velocity) < 0.0006) velocity = 0;
+
+    /* Turning — rudder builds angular velocity, then drifts back to 0 (heavy ship feel) */
+    var rudder = (isPressed('left') ? 1 : 0) + (isPressed('right') ? -1 : 0);
+    /* Rudder is more responsive when moving (water flow over rudder) — but never zero */
+    var rudderEffectiveness = 0.35 + Math.abs(velocity) / maxSpeed * 0.65;
+    headingVel += rudder * turnSpeed * rudderEffectiveness;
+    /* Cap angular velocity so ship never spins frantically */
+    if (headingVel > maxTurn) headingVel = maxTurn;
+    if (headingVel < -maxTurn) headingVel = -maxTurn;
+    /* Angular friction — when you let go of A/D, the turn coasts to a stop */
+    if (rudder === 0) headingVel *= turnFriction;
+    if (Math.abs(headingVel) < 0.00005) headingVel = 0;
+    heading += headingVel;
 
     ship.position.x -= Math.sin(heading) * velocity;
     ship.position.z -= Math.cos(heading) * velocity;
     var distFromOrigin = Math.sqrt(ship.position.x * ship.position.x + ship.position.z * ship.position.z);
     if (distFromOrigin > 240) { ship.position.x *= 0.997; ship.position.z *= 0.997; }
+
+    /* ISLAND COLLISION — push the boat back if it tries to enter any island's
+       sand ring. ISLAND_RADIUS+5 keeps a safe waterline buffer so the hull
+       never clips into the sand (which was making the boat "dissolve" visually). */
+    var BOAT_KEEPOUT = ISLAND_RADIUS + 5;
+    for (var ci = 0; ci < shoreObjs.length; ci++) {
+      var iso = shoreObjs[ci];
+      var icx = ship.position.x - iso.x;
+      var icz = ship.position.z - iso.z;
+      var icd = Math.sqrt(icx * icx + icz * icz);
+      if (icd < BOAT_KEEPOUT && icd > 0.001) {
+        var pushOut = BOAT_KEEPOUT / icd;
+        ship.position.x = iso.x + icx * pushOut;
+        ship.position.z = iso.z + icz * pushOut;
+        velocity *= 0.5;     /* bleed speed on impact like running aground */
+      }
+    }
+    /* Also keep boat away from the starting beach (origin) */
+    var beachDX = ship.position.x;
+    var beachDZ = ship.position.z + 5;     /* beach center is at (0, -5) */
+    var beachD = Math.sqrt(beachDX * beachDX + beachDZ * beachDZ);
+    if (beachD < 16 && beachD > 0.001 && beachD < distFromOrigin + 1) {
+      var beachPush = 16 / beachD;
+      ship.position.x = beachDX * beachPush;
+      ship.position.z = -5 + beachDZ * beachPush;
+    }
 
     var waveH = getOceanHeight(ship.position.x, ship.position.z, t);
     var grad  = getOceanGradient(ship.position.x, ship.position.z, t);
@@ -1316,12 +2184,47 @@
     ship.rotation.x += (targetPitch - ship.rotation.x) * 0.16;
     ship.rotation.z += (targetRoll  - ship.rotation.z) * 0.16;
 
-    if (ship.userData.sails) {
-      ship.userData.sails.forEach(function (s, i) {
-        s.scale.x = 1 + Math.sin(t * 4 + i) * 0.04;
-      });
+    /* CANOE-PADDLING ANIMATION
+       The paddle hangs from the rower's right (top) hand, blade dipping into
+       the water on the right side of the boat. Realistic stroke cycle:
+       1. CATCH — paddle planted forward, blade enters water
+       2. DRIVE — pull paddle back hard, body rotates, blade pushes water back
+       3. RECOVERY — lift blade out, swing forward to next catch
+       Both arms move in coordination — top hand stays high, bottom hand
+       traces the longer arc as the paddle pivots.
+       Rate scales with velocity. Idle = slow gentle stroke; full speed = vigorous. */
+    if (ship.userData.rower && ship.userData.rower.visible) {
+      var ud = ship.userData;
+      var speedRatio = Math.min(1, Math.abs(velocity) / 0.34);
+      var strokeRate = 1.0 + speedRatio * 1.6;        /* 1.0/s idle → 2.6/s full */
+      var stroke = Math.sin(t * strokeRate);          /* -1..+1, drives the cycle */
+      var amp = 0.55 + speedRatio * 0.45;             /* effort: 0.55 idle → 1.0 full */
+
+      /* CHEST LEAN — body rotates with the stroke. Lean forward at catch,
+         back at drive — like real rowing rotation */
+      ud.chest.rotation.x = -stroke * 0.22 * amp;
+      /* Slight twist on torso (around Y) — body rotates toward paddling side on drive */
+      ud.chest.rotation.y = stroke * 0.18 * amp;
+
+      /* RIGHT SHOULDER (top hand on T-grip) — stays relatively high, moves a little */
+      ud.rightShoulder.rotation.x = -0.55 + stroke * 0.30 * amp;
+      ud.rightShoulder.rotation.z = -0.30;
+      ud.rightElbow.rotation.x = 0.50 + Math.max(0, stroke) * 0.35 * amp;
+
+      /* LEFT SHOULDER (bottom hand on shaft) — bigger arc, follows the paddle */
+      ud.leftShoulder.rotation.x = -0.95 + stroke * 0.55 * amp;
+      ud.leftShoulder.rotation.z = 0.45;
+      ud.leftElbow.rotation.x = 0.85 + Math.max(0, stroke) * 0.30 * amp;
+
+      /* PADDLE — rotates around the top-hand pivot. Forward at catch, backward
+         at drive. The blade visibly arcs through the water on each stroke. */
+      ud.oarGroup.rotation.x = 0.35 + stroke * 0.85 * amp;
+      /* Slight side-swing for natural motion */
+      ud.oarGroup.rotation.z = -0.55 + stroke * 0.10 * amp;
+
+      /* Subtle idle breathing — chest bobs slightly even when paddling */
+      ud.chest.position.y = 0.55 + Math.sin(t * 1.4) * 0.01;
     }
-    if (ship.userData.pennant) ship.userData.pennant.rotation.y = Math.sin(t * 3) * 0.4;
 
     wakeTimer -= dt;
     if (Math.abs(velocity) > 0.05 && wakeTimer <= 0) {
@@ -1331,17 +2234,19 @@
       wakeTimer = 0.16;
     }
 
-    /* Camera follow ship */
-    var camDist = 22, camHeight = 11;
+    /* Camera follow — pulled in close for the small rowboat (was 24/12 for the
+       schooner). Soft lerp keeps the heavy-feel weight even though the boat is small. */
+    var camDist = 11, camHeight = 5.2;
     var lookX = Math.sin(heading + lookOffset);
     var lookZ = Math.cos(heading + lookOffset);
     var targetCamX = ship.position.x + lookX * camDist;
     var targetCamZ = ship.position.z + lookZ * camDist;
-    var targetCamY = camHeight + ship.position.y * 0.4;
-    camera.position.x += (targetCamX - camera.position.x) * 0.08;
-    camera.position.y += (targetCamY - camera.position.y) * 0.08;
-    camera.position.z += (targetCamZ - camera.position.z) * 0.08;
-    camera.lookAt(ship.position.x, ship.position.y + 3.0, ship.position.z);
+    var targetCamY = camHeight + ship.position.y * 0.35;
+    camera.position.x += (targetCamX - camera.position.x) * 0.06;
+    camera.position.y += (targetCamY - camera.position.y) * 0.06;
+    camera.position.z += (targetCamZ - camera.position.z) * 0.06;
+    /* Look at the rower's chest height (boat is much shorter than schooner) */
+    camera.lookAt(ship.position.x, ship.position.y + 1.4, ship.position.z);
 
     /* Disembark prompt + compass */
     var nearby = getNearbyIsland();
@@ -1505,7 +2410,9 @@
       nearestPerson.userData.arm.rotation.z = -1.2 + Math.sin(t * 8) * 0.6;
     }
 
-    /* Shore markers + lore-pillar orbs always animate */
+    /* Shore markers + lore-pillar orbs + themed centerpieces */
+    var refX = (MODE === 'sailing') ? ship.position.x : avatarPos.x;
+    var refZ = (MODE === 'sailing') ? ship.position.z : avatarPos.z;
     shoreObjs.forEach(function (s) {
       s.marker.position.y = s.marker.userData.baseY + Math.sin(t * 2.2 + s.index) * 0.45;
       s.halo.rotation.z = t * 0.8 + s.index;
@@ -1513,6 +2420,14 @@
         p.orb.position.y = p.orb.userData.baseY + Math.sin(t * 2.5 + pi + s.index) * 0.25;
         p.halo.rotation.z = t * 1.2 + pi;
       });
+      /* Themed centerpiece animation — gated by avatar/ship proximity to centerpiece origin */
+      if (s.centerpiece && s.centerpiece.anim) {
+        var cdx = refX - s.x;
+        var cdz = refZ - s.z;
+        var cdist = Math.sqrt(cdx * cdx + cdz * cdz);
+        var near = MODE === 'walking' ? cdist < 14 : cdist < 30;
+        s.centerpiece.anim(t, near);
+      }
     });
 
     if ((t - lastWaterUpdate) > WATER_FRAME_RATE) {
